@@ -144,7 +144,7 @@ public class AventuraBloodborne {
                 
                     case 0: //Hablar con Eileen
                         if(ataqueVisceral==false){//la foto de eileen no me va, he puesto otra para ver si va y sí va.
-                        FuncionesGraficas.FotoyMensaje("Eileen", "src/main/java/imagenes/Presentacion.png", "No me suena haberte visto antes por aqui, ten esto, te vendrá bien si quieres sobrevivir", 0.8, false);
+                        FuncionesGraficas.FotoyMensaje("Eileen", "src/main/java/imagenes/DialocoConEileen.png", "No me suena haberte visto antes por aqui, ten esto, te vendrá bien si quieres sobrevivir", 0.8, false);
                         
                         ataqueVisceral=true;
                         }else{
