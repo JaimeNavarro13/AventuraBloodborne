@@ -154,6 +154,19 @@ public class AventuraBloodborne {
                         break;
                         
                     case 1://Explorar
+                        if (ataqueVisceral==false){
+                                                   FuncionesGraficas.warning("Aviso", "Deberias hablar primero con Eileen");
+                                                  }
+                        escena2();
+                        break;
+                        
+                        else {
+                             FuncionesGraficas.FotoyMensaje("Bestia Clerigo", "src/main/java/imagenes/BestiaClerigo.png", "Te has encontrado a una bestia que parece de otro mundo", 0.8, false);
+                             String[] opcionBC = {"1. Hablar", "2. Pelear"};
+                        int opcionesBC = FuncionesGraficas.FotoMensajeMenu("Bestia Clérigo", opcionesBC, "src/main/java/imagenes/BestiaClerigo.png", "¿Qué harás?", 0.8, false);
+                        
+                        
+                            }
                 }
              }
         
