@@ -187,7 +187,7 @@ public class AventuraBloodborne {
     int vidaBestiaClerigo=1000;
     int dañoBestiaClerigo=75;
     boolean hacerVisceral=false;
-    
+    boolean ladyMaria=true;
     do
     {
         String []opciones = {"1.Atacar", "2.Ataque visceral"};
