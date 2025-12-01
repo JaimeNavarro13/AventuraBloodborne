@@ -159,14 +159,49 @@ public class AventuraBloodborne {
                          FuncionesGraficas.warning("Aviso", "Deberias hablar primero con Eileen");
                         } else 
                         {
-                            String [] opcionesBC = {"1.Hablar", "2.Pelear"};
-                            int opcionBC = FuncionesGraficas.FotoMensajeMenu("Bestia Clerigo", opcionesBC, "src/main/java/imagenes/BestiaClerigo.png", "Te encuentras una bestia que no parece ser de este mundo, que haras? ", 0.8, false);
+                         String [] opcionesBC = {"1.Hablar", "2.Pelear"};
+                         int opcionBC = FuncionesGraficas.FotoMensajeMenu("Bestia Clerigo", opcionesBC, "src/main/java/imagenes/BestiaClerigo.png", "Te encuentras una bestia que no parece ser de este mundo, que haras? ", 0.8, false);
+                        }
+                        
+                        switch (opcion){
+                            
+                            case 0: luchaBestiaClerigo();
+                            
+                            case 1: FuncionesGraficas.FotoyMensaje("Bestia Clerigo", "src/main/java/imagenes/BestiaClerigo.png", "Toma esta llave y ve a por quien originó esta pesadilla", 0.8, false);
+                                    FuncionesGraficas.FotoyMensaje("Llave de la torre", "src/main/java/imagenes/LlaveTorreDelReloj.png", "Has conseguido la llave de la torre del reloj astral", 0.8, false);
+                                    llaveTorreReloj=true;
+                                    escena2();
+                                    break;
                         }
                 }
              }
         
                 }
+    static void luchaBestiaClerigo(){
     
+    int vidaJug=200;
+    int vidaMaxJug=250;
+    int dañoJug=50;
+    int dañoVisceral=75;
+    int curacionVisceral=50;
+    int vidaBestiaClerigo=1000;
+    int dañoBestiaClerigo=75;
+    boolean hacerVisceral=false;
+    boolean ladyMaria=true;
+    do
+    {
+        String []opciones = {"1.Atacar", "2.Ataque visceral"};
+    
+    FuncionesGraficas.menuDesplegable("Lucha o muere", "Toma una decisión", opciones);
+    
+    
+    }while (vidaJug>0);
+    
+   
+    
+    
+    
+    }
     static void escena2Eileen(){
     
     }
