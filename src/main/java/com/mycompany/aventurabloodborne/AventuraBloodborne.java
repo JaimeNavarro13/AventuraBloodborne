@@ -180,6 +180,27 @@ public class AventuraBloodborne {
         
         String[] opciones = {"1. Hablar con Lady Maria", "Pelear con Lady Maria", "3. Huir y volver al sueño del cazador"};
         int opcion = FuncionesGraficas.FotoMensajeMenu("Torre del reloj astral", opciones, "src/main/java/imagenes/torreDelReloj.jpg", "Lady Maria reposa inmovil en la silla del reloj astral", 0.8, false);
+        
+        switch (opcion) {
+            case 0: //Hablar
+                FuncionesGraficas.FotoyMensaje("Lady Maria", "src/main/java/imagenes/ladyMaria.png", "La verdad que buscas pesa más de lo que imaginas", 0.8, false);
+                escena3();
+                break;
+
+            case 1: //Pelear
+                boolean victoria = luchaLM();
+
+                if (victoria == false) {
+                    FuncionesGraficas.FotoyMensaje("Has muerto", "src/main/java/imagenes/YouDied.png", "La sangre derramada no ha sido suficiente...", 0.8, false);
+                    System.exit(0);
+                }
+
+                ladyMaria = false;
+
+                if (rakuyo == false) {
+                    FuncionesGraficas.
+                }
+        }
     }
 
     static void escena4() {
