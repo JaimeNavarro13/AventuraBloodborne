@@ -207,7 +207,14 @@ public class AventuraBloodborne {
     }
 
     static void escena3() {
-
+        if (llaveTorreReloj==false) {
+            FuncionesGraficas.warning("Acceso bloqueado", "Necesitas la llave de la torre para poder acceder");
+            escena0();
+            return;
+        } 
+        
+        String[] opciones = {"1. Hablar con Lady Maria", "Pelear con Lady Maria", "3. Huir y volver al sueño del cazador"};
+        int opcion = FuncionesGraficas.FotoMensajeMenu("Torre del reloj astral", opciones, "src/main/java/imagenes/torreDelReloj.jpg", "Lady Maria reposa inmovil en la silla del reloj astral", 0.8, false);
     }
 
     static void escena4() {
