@@ -386,7 +386,7 @@ public class AventuraBloodborne {
                 int opcionPozo = FuncionesGraficas.FotoMensajeMenu(
                         "Pozo de la aldea",
                         opcionesPozo,
-                        "src/main/java/imagenes/pozo",
+                        "src/main/java/imagenes/pozo.png",
                         "Te asomas al pozo."
                         + "\nAlgo enorme se mueve en la oscuridad...",
                         0.8, false);
