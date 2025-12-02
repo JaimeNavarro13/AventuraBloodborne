@@ -96,10 +96,6 @@ public class AventuraBloodborne {
             case 4:
                 escena5(); //Escena final
                 break;
-            default:
-                FuncionesGraficas.warning("Opción no válida", "Debes elegir una opción del 1 al 5.");
-                escena0();
-                break;
         }
     }
 
@@ -305,82 +301,136 @@ public class AventuraBloodborne {
             case 2: //3. Huir
                 escena0();
                 break;
-                
-            default: 
-                FuncionesGraficas.warning("opción no válida", "Debes elegir una de las opciones del menú.");
+             
         }
     }
 
     static void escena4() {
         String[] opciones = {
-            "1. Buscar por la aldea", 
-            "2. Entrar en el pozo", 
+            "1. Buscar por la aldea",
+            "2. Entrar en el pozo",
             "3. Volver al sueño del cazador"};
         int opcion = FuncionesGraficas.FotoMensajeMenu(
-                "Aldea pesquera", opciones, 
-                "src/main/java/imagenes/AldeaPesquera.png", 
-                "La bruma del mar cubre las chozas y el olor a sangre vieja llena el aire.", 
+                "Aldea pesquera", opciones,
+                "src/main/java/imagenes/AldeaPesquera.png",
+                "La bruma del mar cubre las chozas y el olor a sangre vieja llena el aire.",
                 0.8, false);
-        
+
         switch (opcion) {
-            case 0: //Buscar por la aldea
-                String[] opcionesAldea = {
-                "1. Rastrear la aldea",
-                "2. Seguir un rastro extraño",
-                "3. Rebuscar entre los restos del chamán",
-                "4. Volver atrás"};
-                
-                int opcionAldea = FuncionesGraficas.FotoMensajeMenu(
-                        "Aldea pesquera", opcionesAldea, 
-                        "src/main/java/imagenes/buscandoporlaaldea.png", 
-                        "El sonido del mar golpea la costa mientras decides tu siguiente paso.", 
-                        0.8, false);
-                
-                switch (opcionAldea) {
-                    case 0: //1. Rastrear la aldea
-                        FuncionesGraficas.warning("Rastrear la aldea", "No hay nada");
-                        break;
-                     
-                    case 1: //Seguir un rastro extraño
-                        FuncionesGraficas.FotoyMensaje(
-                                "Demasiada curiosidad", 
-                                "src/main/java/imagenes/jabali.png", 
-                                "Has encontrado algo que no debías...\nHas muerto.", 
-                                0.8, false);
-                        System.exit(0);
-                        break;
-                        
-                    case 2: //Rebuscar entre los restos del chamán
-                        if (cuchillaChaman==false) {
+
+            case 0:
+                boolean seguirBuscando = true;
+
+                while (seguirBuscando == true) {
+
+                    String[] opcionesAldea = {
+                        "1. Rastrear la aldea",
+                        "2. Seguir un rastro extraño",
+                        "3. Rebuscar entre los restos del chamán",
+                        "4. Volver atrás"
+                    };
+
+                    int opcionAldea = FuncionesGraficas.FotoMensajeMenu(
+                            "Aldea pesquera",
+                            opcionesAldea,
+                            "src/main/java/imagenes/AldeaPesquera.png",
+                            "El sonido del mar golpea la costa mientras decides tu siguiente paso.",
+                            0.8,
+                            false
+                    );
+
+                    switch (opcionAldea) {
+
+                        case 0: // Rastrear la aldea
+                            FuncionesGraficas.warning("Rastrear la aldea", "No hay nada.");
+                            break;
+
+                        case 1: // Seguir un rastro extraño
                             FuncionesGraficas.FotoyMensaje(
-                                    "Restos del chamán", 
-                                    "src/main/java/imagenes/CuchillaDeChaman.png", 
-                                    "Entre los restos del chamán encuentras una cuchilla impregnada de extrañas runas.", 
-                                    0.5, false);
-                            cuchillaChaman=true;
+                                    "Demasiada curiosidad",
+                                    "src/main/java/imagenes/jabali.png",
+                                    "Has encontrado algo que no debías...\nHas muerto.",
+                                    0.8, false);
+                            System.exit(0);
+                            break;
+
+                        case 2: // Rebuscar entre los restos del chamán
+                            if (cuchillaChaman == false) {
+                                FuncionesGraficas.FotoyMensaje(
+                                        "Restos del chamán",
+                                        "src/main/java/imagenes/CuchillaDeChaman.png",
+                                        "Entre los restos del chamán encuentras una cuchilla impregnada de extrañas runas.",
+                                        0.6, false);
+                                cuchillaChaman = true;
+                            } else {
+                                FuncionesGraficas.warning("Restos del chamán", "No hay nada que buscar.");
+                            }
+
+                            break;
+
+                        case 3: //Volver atrás
+                            seguirBuscando = false;
+                            break;
+
+                    }
+                }
+                escena4();
+                break;
+
+            case 1: //Entrar en el pozo
+
+                String[] opcionesPozo = {
+                    "1. Luchar contra lo que habita en el pozo",
+                    "2. Volver a la aldea pesquera"};
+
+                int opcionPozo = FuncionesGraficas.FotoMensajeMenu(
+                        "Pozo de la aldea",
+                        opcionesPozo,
+                        "src/main/java/imagenes/pozo",
+                        "Te asomas al pozo."
+                        + "\nAlgo enorme se mueve en la oscuridad...",
+                        0.8, false);
+
+                switch (opcionPozo) {
+
+                    case 0: //Luchar
+                        if (cuchillaChaman == false) {
+                            FuncionesGraficas.FotoyMensaje(
+                                    "Necesitas la cuchilla del chamán",
+                                    "src/main/java/imagenes/tiburontemata.png",
+                                    "Sin la cuchilla del chamán en tus manos, los dos tiburones no dudan:"
+                                    + "\nsaltan sobre ti con una ferocidad inhumana."
+                                    + "\nNo tienes opción alguna."
+                                    + "\nTu cuerpo desaparece bajo un torbellino de dientes y garras."
+                                    + "\nHas muerto.",
+                                    0.8, false);
+
+                            FuncionesGraficas.FotoyMensaje(
+                                    "Has muerto",
+                                    "src/main/java/imagenes/YouDied.png",
+                                    "La profundidad del pozo se convierte en tu tumba.",
+                                    0.8, false);
+
+                            System.exit(0);
                         } else {
-                            FuncionesGraficas.warning("Restos del chamán", "No hay nada más que buscar");
+                            luchaTiburones();
+                            escena4();
                         }
-                        escena4();
                         break;
-                        
-                    case 3: //Volver al menú de la escena
+
+                    case 1: //Volver a la aldea
                         escena4();
                         break;
                 }
-                
-            case 1: //Entrar en el pozo
-                
+
             case 2: //Volver al sueño del cazador
                 escena0();
                 break;
-                
-            default:
-                FuncionesGraficas.warning("Opción no válida", "Debes elegir una de las opciones del 1 al 3.");
-                escena4();
-                break;
         }
-        
+    }
+    
+    static void luchaTiburones() {
+    
     }
 
     static void escena5() {
