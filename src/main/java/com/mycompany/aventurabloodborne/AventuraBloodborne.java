@@ -430,9 +430,18 @@ public class AventuraBloodborne {
     }
     
     static void luchaTiburones() {
-    
-    }
 
+        int vidaJug = 220;
+        int danioJug = 35;
+        int danioVisceral = 100;
+        int curacionVisceral = 60;
+        int vidaTiburon = 450;
+        int dañioTiburon = 45;
+        boolean hacerVisceral = false;
+        String[] opciones = {"1. Atacar", "2. Ataque visceral"};
+
+    }
+    
     static void escena5() {
 
     }
