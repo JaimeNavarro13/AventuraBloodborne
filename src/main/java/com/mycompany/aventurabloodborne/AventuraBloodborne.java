@@ -3,6 +3,7 @@
  */
 package com.mycompany.aventurabloodborne;
 
+import java.util.Random;
 import modulos.*;
 
 /**
@@ -238,33 +239,114 @@ public class AventuraBloodborne {
     
     int vidaJug=200;
     int vidaMaxJug=250;
-    int dañoJug=50;
+    int dañoJugBase=50;
     int dañoVisceral=75;
     int curacionVisceral=50;
     int vidaBestiaClerigo=1000;
     int dañoBestiaClerigo=75;
     boolean hacerVisceral=false;
     boolean ladyMaria=true;
-    do
+    boolean peleando=true;
+    Random dado = new Random();
+    
+    while (vidaJug > 0 && vidaBestiaClerigo > 0) 
     {
-        String []opciones = {
-            "1.Atacar", 
-            "2.Ataque visceral"};
-    
-    FuncionesGraficas.menuDesplegable(
-            "Lucha o muere", 
-            "Toma una decisión.", 
-            opciones);
-    
-    
-    }while (vidaJug>0);
-    
-   
-    
-    
-    
+     String[] opcionesLB = {
+                "1. Atacar",
+                "2. Ataque visceral"};
+
+            int opcionLB = FuncionesGraficas.FotoMensajeMenu(
+                    "Combate contra los tiburones",
+                    opcionesLB,
+                    "src/main/java/imagenes/BestiaClerigo.png",
+                    "Decide con que quieres atacar: ",
+                    0.8, false);
+
+            switch (opcionLB) {
+
+                case 0: //Ataque normal
+                    FuncionesGraficas.FotoyMensaje(
+                            "Ataque",
+                            "src/main/java/imagenes/ataqueSimple.png",
+                            "Directo al corazón...",
+                            0.8, false);
+                    vidaBestiaClerigo = vidaBestiaClerigo - dañoJugBase;
+                    break;
+
+                case 1: //Ataque visceral
+                    if (hacerVisceral == true) {
+                        FuncionesGraficas.FotoyMensaje(
+                                "¡Ataque visceral!",
+                                "src/main/java/imagenes/ataqueVisceral.png",
+                                "Tu ataque visceral impacta con una precisión brutal.",
+                                0.8, false);
+
+                        vidaBestiaClerigo = vidaBestiaClerigo - dañoVisceral;
+                    } else {
+                        FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
+                    }
+                    break;
+
+            }
+
+            if (vidaBestiaClerigo < 500) {
+                FuncionesGraficas.FotoyMensaje(
+                        "¡PELIGRO!",
+                        "src/main/java/imagenes/BestiaClerigo.png",
+                        "La bestia clerigo lanza un ataque desesperado.",
+                        0.8, false);
+                        vidaJug = vidaJug - dañoBestiaClerigo*10;
+                        
+                        if (vidaJug<= 0)
+                            FuncionesGraficas.FotoyMensaje("Se acabó.", "src/java/main/imagenes/YouDied.png", "", 0.8, false);
+                        System.exit(0);
+                
+            } else {
+                
+                FuncionesGraficas.FotoyMensaje(
+                        "La bestia se prepara para atacar", 
+                        "src/main/java/imagenes/BestiaClerigo.png", 
+                        "La Bestia Clérigo lanza un devastador ataque hacia ti", 
+                        0.8, false);
+                
+                int suerte = dado.nextInt(5);
+
+                if (suerte==0) {
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "Esquiva",
+                            "src/main/java/imagenes/esquiva.png",
+                            "¡PANG! Desvias el ataque con tu pistola.",
+                            0.8, false);
+                } else {
+                    vidaJug = vidaJug - dañoBestiaClerigo;
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "¡GOLPE DEVASTADOR!",
+                            "src/main/java/imagenes/tiburonSolo.png",
+                            "El golpe de la bestia te deja desorientado. Recibes " + dañoBestiaClerigo + " de daño.",
+                            0.8, false);
+                       }
+            }
+            if (vidaJug <= 0) {
+                FuncionesGraficas.FotoyMensaje(
+                        "HAS MUERTO",
+                        "src/main/java/imagenes/YouDied.png",
+                        "Este es tu fin",
+                        0.8, false);
+                break;
+            }
+        }
     }
+
+
     static void escena2Eileen(){
+        
+        FuncionesGraficas.FotoyMensaje("Eileen", "src/java/main/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
+        insigniaKosm=true;
+        escena0();
+        return;
+        
     
     }
 
