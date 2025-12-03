@@ -431,17 +431,119 @@ public class AventuraBloodborne {
     
     static void luchaTiburones() {
 
-        int vidaJug = 220;
-        int danioJug = 35;
-        int danioVisceral = 100;
-        int curacionVisceral = 60;
-        int vidaTiburon = 450;
-        int dañioTiburon = 45;
+        int vidaJug = 200;
+        int vidaTiburon = 300;
+        int danoJugBase = 80;
+        int danoTiburonBase = 50;
+        int danoTiburonExtra = 90;
+        int danoVisceral = 180;
+        boolean peleando = true;
         boolean hacerVisceral = false;
-        String[] opciones = {"1. Atacar", "2. Ataque visceral"};
 
+        while (peleando == true) {
+
+            String[] opcionesLT = {
+                "1. Atacar",
+                "2. Ataque visceral"};
+
+            int opcionLT = FuncionesGraficas.FotoMensajeMenu(
+                    "Combate contra los tiburones",
+                    opcionesLT,
+                    "src/main/java/imagenes/luchaTiburones.png",
+                    "Decide con que quieres atacar: ",
+                    0.8, false);
+
+            switch (opcionLT) {
+
+                case 0: //Ataque normal
+                    FuncionesGraficas.FotoyMensaje(
+                            "Ataque",
+                            "src/main/java/imagenes/ataqueSimple.png",
+                            "Directo al corazón...",
+                            0.8, false);
+                    vidaTiburon = vidaTiburon - danoJugBase;
+                    break;
+
+                case 1: //Ataque visceral
+                    if (hacerVisceral == true) {
+                        FuncionesGraficas.FotoyMensaje(
+                                "¡Ataque visceral!",
+                                "src/main/java/imagenes/ataqueVisceral.png",
+                                "Tu ataque visceral impacta con una precisión brutal.",
+                                0.8, false);
+
+                        vidaTiburon = vidaTiburon - danoVisceral;
+                    } else {
+                        FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
+                    }
+                    break;
+
+            }
+
+            if (vidaTiburon <= 0) {
+                FuncionesGraficas.FotoyMensaje(
+                        "¡VICTORIA!",
+                        "src/main/java/imagenes/tiburonMuerto.png",
+                        "El gigante cae.",
+                        0.8, false);
+
+                FuncionesGraficas.FotoyMensaje(
+                        "¡VICTORIA!",
+                        "src/main/java/imagenes/Rakuyo.png",
+                        "Consigues la Rakuyo.",
+                        0.8, false);
+                peleando = false;
+                tiburon = false;
+                rakuyo = true;
+                cordonHab3 = true;
+                
+            } else {
+                
+                FuncionesGraficas.FotoyMensaje(
+                        "La bestia carga", 
+                        "src/main/java/imagenes/luchaTiburones.png", 
+                        "El tiburón hunde los pies en el suelo y se prepara para atacar...", 
+                        0.8, false);
+                
+                int suerteDefensa = (int) (Math.random() * 100);
+
+                if (suerteDefensa < 20) {
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "Esquiva",
+                            "src/main/java/imagenes/esquiva.png",
+                            "El ancla pasa rozando tu cabeza. Ruedas a tiempo y no sufres daños.",
+                            0.8, false);
+                } else if (suerteDefensa > 85) {
+                    vidaJug = vidaJug - danoTiburonExtra;
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "¡GOLPE CRÍTICO!",
+                            "src/main/java/imagenes/tiburonSolo.png",
+                            "¡BRUTAL! Te lanza contra la pared. Recibes " + danoTiburonExtra + " de daño.",
+                            0.8, false);
+                } else {
+                    vidaJug = vidaJug - danoTiburonBase;
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "Impacto",
+                            "src/main/java/imagenes/tiburonSolo.png",
+                            "El golpe te sacude los huesos. Recibes " + danoTiburonBase + " de daño.",
+                            0.8, false);
+                }
+            }
+            if (vidaJug <= 0) {
+                FuncionesGraficas.FotoyMensaje(
+                        "HAS MUERTO",
+                        "src/main/java/imagenes/YouDied.png",
+                        "La oscuridad te consume...",
+                        0.8, false);
+                peleando = false;
+                break;
+            }
+        }
     }
-    
+
     static void escena5() {
 
     }
