@@ -157,13 +157,16 @@ public class AventuraBloodborne {
             escena0();
             return;
 
-        } else {
+        } else if (bestiaClerigo==true) {
             FuncionesGraficas.FotoyMensaje(
                     "Yharnam",
                     "src/main/java/imagenes/yharnam.png",
                     "Bienvenido a Yharnam",
                     0.8, false);
-        }
+        }else {
+            FuncionesGraficas.warning("Nada que hacer aqui", "Ya no hay nada que hacer en Yharnam");
+              }
+        
 
         if (bestiaClerigo == false) {
             escena2Eileen();
@@ -303,7 +306,7 @@ public class AventuraBloodborne {
                         vidaJug = vidaJug - dañoBestiaClerigo*10;
                         
                         if (vidaJug<= 0)
-                            FuncionesGraficas.FotoyMensaje("Se acabó.", "src/java/main/imagenes/YouDied.png", "", 0.8, false);
+                            FuncionesGraficas.FotoyMensaje("Se acabó.", "src/java/main/imagenes/YouDied.png", "Hay cosas que no se solucionan solo peleando...", 0.8, false);
                         System.exit(0);
                 
             } else {
