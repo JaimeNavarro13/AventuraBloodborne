@@ -392,11 +392,252 @@ public class AventuraBloodborne {
                 break;
 
             case 1: //2. Pelear
+                if (ladyMaria==true) {
+                luchaLadyMaria();
+                escena3();
+                } else {
+                    FuncionesGraficas.warning("Sala despejada", "Ya has derrotado a la guardiana de la torre. No hay nada más que hacer aquí, salvo avanzar hacia el secreto que ella protegía.");
+                    escena3();
+                }
+                break;
              
             case 2: //3. Huir
                 escena0();
                 break;
              
+        }
+    }
+    
+    static void luchaLadyMaria() {
+
+        int vidaJug = 140;
+        int vidaMaria = 250;
+        int danoJugBase = 80;
+        int danoMariaBase = 45;
+        int danoMariaExtra = 75;
+        int danoVisceral = 150;
+        boolean peleando = true;
+
+        if (rakuyo == true) {
+
+            while (peleando == true) {
+
+                String[] opcionesLM = {
+                    "1. Atacar con el arma",
+                    "2. Ataque visceral"
+                };
+
+                int opcionLM = FuncionesGraficas.FotoMensajeMenu(
+                        "Combate en la Torre del Reloj",
+                        opcionesLM,
+                        "src/main/java/imagenes/ladymariasentada.png",
+                        "Lady Maria te espera sentada en la silla... decide tu movimiento: ",
+                        0.8, false);
+
+                switch (opcionLM) {
+
+                    case 0: // Ataque normal
+                        FuncionesGraficas.FotoyMensaje(
+                                "Golpe de Cazador",
+                                "src/main/java/imagenes/golpesencillo.png",
+                                "Tu arma choca contra su Rakuyo saltando chispas...",
+                                0.8, false);
+                        vidaMaria = vidaMaria - danoJugBase;
+                        break;
+
+                    case 1: // Ataque visceral
+                        if (ataqueVisceral == true) {
+                            FuncionesGraficas.FotoyMensaje(
+                                    "¡Ataque visceral exitoso!",
+                                    "src/main/java/imagenes/visceralcontraLM.png",
+                                    "Desvías su ataque en el último segundo y hundes tu mano en su pecho.",
+                                    0.8, false);
+
+                            vidaMaria = vidaMaria - danoVisceral;
+                        } else {
+                            FuncionesGraficas.warning("Fallaste", "No lograste conectar el ataque visceral a tiempo.");
+                            continue;
+                        }
+                        break;
+                }
+
+                if (vidaMaria <= 0) {
+                    FuncionesGraficas.FotoyMensaje(
+                            "¡VICTORIA!",
+                            "src/main/java/imagenes/LMaliada.png",
+                            "Lady Maria no ha aguantado la presión y decide ponerse de tu lado.",
+                            0.8, false);
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "Recompensas obtenidas",
+                            "src/main/java/imagenes/TercioCordonUmbilical.png",
+                            "Has conseguido: "
+                            + "\nUn tercio de cordon umbilical"
+                            + "\nMejora ataque visceral",
+                            0.8, false);
+
+                    peleando = false;
+                    ladyMaria = false;
+                    cordonHab2 = true;
+                    mejoraAtaqueVisceral = 1;
+
+                } else {
+                    FuncionesGraficas.FotoyMensaje(
+                            "Arte de Sangre",
+                            "src/main/java/imagenes/LMlistalucha.png",
+                            "Lady Maria esta lista para la lucha...",
+                            0.8, false);
+
+                    int suerteDefensa = (int) (Math.random() * 100);
+
+                    if (suerteDefensa < 20) {
+                        FuncionesGraficas.FotoyMensaje(
+                                "Paso rápido",
+                                "src/main/java/imagenes/LMesquiva.png",
+                                "Su hoja pasa a milímetros de tu cuello. Ha estado cerca.",
+                                0.8, false);
+
+                    } else if (suerteDefensa > 85) {
+                        vidaJug = vidaJug - danoMariaExtra;
+
+                        FuncionesGraficas.FotoyMensaje(
+                                "¡GOLPE DE SANGRE!",
+                                "src/main/java/imagenes/LMataquefuerte.png",
+                                "¡DEVASTADOR! El fuego y la sangre te queman. Recibes " + danoMariaExtra + " de daño.",
+                                0.8, false);
+                    } else {
+                        vidaJug = vidaJug - danoMariaBase;
+
+                        FuncionesGraficas.FotoyMensaje(
+                                "Corte rápido",
+                                "src/main/java/imagenes/ladyMaria.png",
+                                "Sus movimientos son elegantes pero letales. Recibes " + danoMariaBase + " de daño.",
+                                1.2, false);
+                    }
+                }
+
+                if (vidaJug <= 0) {
+                    FuncionesGraficas.FotoyMensaje(
+                            "HAS MUERTO",
+                            "src/main/java/imagenes/YouDied.png",
+                            "La pesadilla vuelve a empezar...",
+                            0.8, false);
+                    peleando = false;
+                    System.exit(0);
+                    break;
+                }
+            }
+        } else {
+                        while (peleando == true) {
+
+                String[] opcionesLM = {
+                    "1. Atacar con el arma",
+                    "2. Ataque visceral"
+                };
+
+                int opcionLM = FuncionesGraficas.FotoMensajeMenu(
+                        "Combate en la Torre del Reloj",
+                        opcionesLM,
+                        "src/main/java/imagenes/ladymariasentada.png",
+                        "Lady Maria te espera sentada en la silla... decide tu movimiento: ",
+                        0.8, false);
+
+                switch (opcionLM) {
+
+                    case 0: // Ataque normal
+                        FuncionesGraficas.FotoyMensaje(
+                                "Golpe de Cazador",
+                                "src/main/java/imagenes/golpesencillo.png",
+                                "Tu arma choca contra su Rakuyo saltando chispas...",
+                                0.8, false);
+                        vidaMaria = vidaMaria - danoJugBase;
+                        break;
+
+                    case 1: // Ataque visceral
+                        if (ataqueVisceral == true) {
+                            FuncionesGraficas.FotoyMensaje(
+                                    "¡Ataque visceral exitoso!",
+                                    "src/main/java/imagenes/visceralcontraLM.png",
+                                    "Desvías su ataque en el último segundo y hundes tu mano en su pecho.",
+                                    0.8, false);
+
+                            vidaMaria = vidaMaria - danoVisceral;
+                            ataqueVisceral=false;
+                        } else {
+                            FuncionesGraficas.warning("Fallaste", "No lograste conectar el ataque visceral a tiempo.");
+                            continue;
+                        }
+                        break;
+                }
+
+                if (vidaMaria <= 0) {
+                    FuncionesGraficas.FotoyMensaje(
+                            "¡VICTORIA!",
+                            "src/main/java/imagenes/LMmuerta.png",
+                            "Maltrecha y sin fuerzas, Maria te mira con ojos cansados. "
+                            + "\n'Un cadáver... debe ser dejado en paz', susurra. "
+                            + "\nEn un último acto de desafío, lleva su hoja a su propia garganta y se desploma sobre las flores del jardín astral. "
+                            + "\nLa vía está libre.",
+                            0.8, false);
+
+                    FuncionesGraficas.FotoyMensaje(
+                            "Recompensas obtenidas",
+                            "src/main/java/imagenes/LMmuerta.png",
+                            
+                            "Has conseguido: "
+                            + "\nMejora ataque visceral",
+                            0.8, false);
+
+                    peleando = false;
+                    ladyMaria = false;
+                    mejoraAtaqueVisceral = 1;
+
+                } else {
+                    FuncionesGraficas.FotoyMensaje(
+                            "Arte de Sangre",
+                            "src/main/java/imagenes/LMlistalucha.png",
+                            "Lady Maria esta lista para la lucha...",
+                            0.8, false);
+
+                    int suerteDefensa = (int) (Math.random() * 100);
+
+                    if (suerteDefensa < 20) {
+                        FuncionesGraficas.FotoyMensaje(
+                                "Paso rápido",
+                                "src/main/java/imagenes/LMesquiva.png",
+                                "Su hoja pasa a milímetros de tu cuello. Ha estado cerca.",
+                                0.8, false);
+
+                    } else if (suerteDefensa > 85) {
+                        vidaJug = vidaJug - danoMariaExtra;
+
+                        FuncionesGraficas.FotoyMensaje(
+                                "¡GOLPE DE SANGRE!",
+                                "src/main/java/imagenes/LMataquefuerte.png",
+                                "¡DEVASTADOR! El fuego y la sangre te queman. Recibes " + danoMariaExtra + " de daño.",
+                                0.8, false);
+                    } else {
+                        vidaJug = vidaJug - danoMariaBase;
+
+                        FuncionesGraficas.FotoyMensaje(
+                                "Corte rápido",
+                                "src/main/java/imagenes/ladyMaria.png",
+                                "Sus movimientos son elegantes pero letales. Recibes " + danoMariaBase + " de daño.",
+                                1.2, false);
+                    }
+                }
+
+                if (vidaJug <= 0) {
+                    FuncionesGraficas.FotoyMensaje(
+                            "HAS MUERTO",
+                            "src/main/java/imagenes/YouDied.png",
+                            "La pesadilla vuelve a empezar...",
+                            0.8, false);
+                    peleando = false;
+                    System.exit(0);
+                    break;
+                }
+            }
         }
     }
 
