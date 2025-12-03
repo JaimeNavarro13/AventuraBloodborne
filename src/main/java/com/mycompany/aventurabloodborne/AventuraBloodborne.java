@@ -383,12 +383,17 @@ public class AventuraBloodborne {
         
         switch (opcion) {
             case 0: //1. Hablar
+                if (ladyMaria==true) {
                 FuncionesGraficas.FotoyMensaje(
                         "Lady Maria", 
                         "src/main/java/imagenes/ladyMaria.png", 
                         "La verdad que buscas pesa más de lo que imaginas.", 
                         0.8, false);
                 escena3();
+                } else {
+                    FuncionesGraficas.warning("Sala despejada", "Ya has derrotado a la guardiana de la torre. No hay nada más que hacer aquí, salvo avanzar hacia el secreto que ella protegía.");
+                    escena3();
+                }
                 break;
 
             case 1: //2. Pelear
