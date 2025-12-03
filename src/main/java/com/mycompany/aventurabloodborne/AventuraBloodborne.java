@@ -204,21 +204,25 @@ public class AventuraBloodborne {
                 case 1://Explorar
                     if (ataqueVisceral == false) {
                         FuncionesGraficas.warning("Aviso", "Deberias hablar primero con Eileen.");
-                    } else {
+                        escena2();
+                        return;
+                    }
                         String[] opcionesBC = {
                             "1.Hablar",
-                            "2.Pelear"};
+                            "2.Pelear"
+                            };
                         int opcionBC = FuncionesGraficas.FotoMensajeMenu(
                                 "Bestia Clerigo", opcionesBC,
                                 "src/main/java/imagenes/BestiaClerigo.png",
                                 "Te encuentras una bestia que no parece ser de este mundo, ¿que harás? ",
                                 0.8, false);
-                    }
+                    
 
-                    switch (opcion) {
+                    switch (opcionBC) {
 
                         case 0:
                             luchaBestiaClerigo();
+                            break;
 
                         case 1:
                             FuncionesGraficas.FotoyMensaje(
@@ -246,7 +250,6 @@ public class AventuraBloodborne {
     static void luchaBestiaClerigo(){
     
     int vidaJug=200;
-    int vidaMaxJug=250;
     int dañoJugBase=50;
     int dañoVisceral=75;
     int curacionVisceral=50;
@@ -290,6 +293,7 @@ public class AventuraBloodborne {
                                 0.8, false);
 
                         vidaBestiaClerigo = vidaBestiaClerigo - dañoVisceral;
+                        
                     } else {
                         FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
                     }
