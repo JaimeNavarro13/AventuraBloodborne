@@ -401,138 +401,140 @@ public class AventuraBloodborne {
     }
 
     static void escena4() {
-        String[] opciones = {
-            "1. Buscar por la aldea",
-            "2. Entrar en el pozo",
-            "3. Volver al sueño del cazador"};
-        int opcion = FuncionesGraficas.FotoMensajeMenu(
-                "Aldea pesquera", opciones,
-                "src/main/java/imagenes/AldeaPesquera.png",
-                "La bruma del mar cubre las chozas y el olor a sangre vieja llena el aire.",
-                0.8, false);
 
-        switch (opcion) {
+        if (insigniaKosm == true) {
+            String[] opciones = {
+                "1. Buscar por la aldea",
+                "2. Entrar en el pozo",
+                "3. Volver al sueño del cazador"};
+            int opcion = FuncionesGraficas.FotoMensajeMenu(
+                    "Aldea pesquera", opciones,
+                    "src/main/java/imagenes/AldeaPesquera.png",
+                    "La bruma del mar cubre las chozas y el olor a sangre vieja llena el aire.",
+                    0.8, false);
 
-            case 0:
-                boolean seguirBuscando = true;
+            switch (opcion) {
 
-                while (seguirBuscando == true) {
+                case 0:
+                    boolean seguirBuscando = true;
 
-                    String[] opcionesAldea = {
-                        "1. Rastrear la aldea",
-                        "2. Seguir un rastro extraño",
-                        "3. Rebuscar entre los restos del chamán",
-                        "4. Volver atrás"
-                    };
+                    while (seguirBuscando == true) {
 
-                    int opcionAldea = FuncionesGraficas.FotoMensajeMenu(
-                            "Aldea pesquera",
-                            opcionesAldea,
-                            "src/main/java/imagenes/AldeaPesquera.png",
-                            "El sonido del mar golpea la costa mientras decides tu siguiente paso.",
-                            0.8,
-                            false
-                    );
+                        String[] opcionesAldea = {
+                            "1. Rastrear la aldea",
+                            "2. Seguir un rastro extraño",
+                            "3. Rebuscar entre los restos del chamán",
+                            "4. Volver atrás"
+                        };
 
-                    switch (opcionAldea) {
+                        int opcionAldea = FuncionesGraficas.FotoMensajeMenu(
+                                "Aldea pesquera",
+                                opcionesAldea,
+                                "src/main/java/imagenes/AldeaPesquera.png",
+                                "El sonido del mar golpea la costa mientras decides tu siguiente paso.",
+                                0.8,
+                                false
+                        );
 
-                        case 0: // Rastrear la aldea
-                            FuncionesGraficas.warning("Rastrear la aldea", "No hay nada.");
-                            break;
+                        switch (opcionAldea) {
 
-                        case 1: // Seguir un rastro extraño
-                            FuncionesGraficas.FotoyMensaje(
-                                    "Demasiada curiosidad",
-                                    "src/main/java/imagenes/jabali.png",
-                                    "Has encontrado algo que no debías...\nHas muerto.",
-                                    0.8, false);
-                            System.exit(0);
-                            break;
+                            case 0: // Rastrear la aldea
+                                FuncionesGraficas.warning("Rastrear la aldea", "No hay nada.");
+                                break;
 
-                        case 2: // Rebuscar entre los restos del chamán
-                            if (cuchillaChaman == false) {
+                            case 1: // Seguir un rastro extraño
                                 FuncionesGraficas.FotoyMensaje(
-                                        "Restos del chamán",
-                                        "src/main/java/imagenes/CuchillaDeChaman.png",
-                                        "Entre los restos del chamán encuentras una cuchilla impregnada de extrañas runas.",
-                                        0.6, false);
-                                cuchillaChaman = true;
-                            } else {
-                                FuncionesGraficas.warning("Restos del chamán", "No hay nada que buscar.");
-                            }
+                                        "Demasiada curiosidad",
+                                        "src/main/java/imagenes/jabali.png",
+                                        "Has encontrado algo que no debías...\nHas muerto.",
+                                        0.8, false);
+                                System.exit(0);
+                                break;
 
-                            break;
+                            case 2: // Rebuscar entre los restos del chamán
+                                if (cuchillaChaman == false) {
+                                    FuncionesGraficas.FotoyMensaje(
+                                            "Restos del chamán",
+                                            "src/main/java/imagenes/CuchillaDeChaman.png",
+                                            "Entre los restos del chamán encuentras una cuchilla impregnada de extrañas runas.",
+                                            0.6, false);
+                                    cuchillaChaman = true;
+                                } else {
+                                    FuncionesGraficas.warning("Restos del chamán", "No hay nada que buscar.");
+                                }
 
-                        case 3: //Volver atrás
-                            seguirBuscando = false;
-                            break;
+                                break;
 
+                            case 3: //Volver atrás
+                                seguirBuscando = false;
+                                break;
+
+                        }
                     }
-                }
-                escena4();
-                break;
+                    escena4();
+                    break;
 
-            case 1: //Entrar en el pozo
+                case 1: //Entrar en el pozo
 
-                String[] opcionesPozo = {
-                    "1. Luchar contra lo que habita en el pozo",
-                    "2. Volver a la aldea pesquera"};
+                    String[] opcionesPozo = {
+                        "1. Luchar contra lo que habita en el pozo",
+                        "2. Volver a la aldea pesquera"};
 
-                int opcionPozo = FuncionesGraficas.FotoMensajeMenu(
-                        "Pozo de la aldea",
-                        opcionesPozo,
-                        "src/main/java/imagenes/pozo.png",
-                        "Te asomas al pozo."
-                        + "\nAlgo enorme se mueve en la oscuridad...",
-                        0.8, false);
+                    int opcionPozo = FuncionesGraficas.FotoMensajeMenu(
+                            "Pozo de la aldea",
+                            opcionesPozo,
+                            "src/main/java/imagenes/pozo.png",
+                            "Te asomas al pozo."
+                            + "\nAlgo enorme se mueve en la oscuridad...",
+                            0.8, false);
 
-                switch (opcionPozo) {
+                    switch (opcionPozo) {
 
-                    case 0: //Luchar
-                        if (rakuyo==true) {
-                            FuncionesGraficas.warning(
-                                    "Pozo vacío", 
-                                    "El agua está en calma y teñida de rojo."
-                                    + "\nYa has acabado con las bestias y obtenido la Rakuyo."
-                                    + "\nNo hay razón para volver a bajar.");
-                            
+                        case 0: //Luchar
+                            if (rakuyo == true) {
+                                FuncionesGraficas.warning(
+                                        "Pozo vacío",
+                                        "El agua está en calma y teñida de rojo."
+                                        + "\nYa has acabado con las bestias y obtenido la Rakuyo."
+                                        + "\nNo hay razón para volver a bajar.");
+
+                                escena4();
+                            } else if (cuchillaChaman == false) {
+                                FuncionesGraficas.FotoyMensaje(
+                                        "Necesitas la cuchilla del chamán",
+                                        "src/main/java/imagenes/tiburontemata.png",
+                                        "Sin la cuchilla del chamán en tus manos, los dos tiburones no dudan:"
+                                        + "\nsaltan sobre ti con una ferocidad inhumana."
+                                        + "\nNo tienes opción alguna."
+                                        + "\nTu cuerpo desaparece bajo un torbellino de dientes y garras."
+                                        + "\nHas muerto.",
+                                        0.8, false);
+
+                                FuncionesGraficas.FotoyMensaje(
+                                        "Has muerto",
+                                        "src/main/java/imagenes/YouDied.png",
+                                        "La profundidad del pozo se convierte en tu tumba.",
+                                        0.8, false);
+
+                                System.exit(0);
+                            } else {
+                                luchaTiburones();
+                                escena4();
+                            }
+                            break;
+
+                        case 1: //Volver a la aldea
                             escena4();
-                        }
-                        
-                        
-                        
-                        else if (cuchillaChaman == false) {
-                            FuncionesGraficas.FotoyMensaje(
-                                    "Necesitas la cuchilla del chamán",
-                                    "src/main/java/imagenes/tiburontemata.png",
-                                    "Sin la cuchilla del chamán en tus manos, los dos tiburones no dudan:"
-                                    + "\nsaltan sobre ti con una ferocidad inhumana."
-                                    + "\nNo tienes opción alguna."
-                                    + "\nTu cuerpo desaparece bajo un torbellino de dientes y garras."
-                                    + "\nHas muerto.",
-                                    0.8, false);
+                            break;
+                    }
 
-                            FuncionesGraficas.FotoyMensaje(
-                                    "Has muerto",
-                                    "src/main/java/imagenes/YouDied.png",
-                                    "La profundidad del pozo se convierte en tu tumba.",
-                                    0.8, false);
-
-                            System.exit(0);
-                        } else {
-                            luchaTiburones();
-                            escena4();
-                        }
-                        break;
-
-                    case 1: //Volver a la aldea
-                        escena4();
-                        break;
-                }
-
-            case 2: //Volver al sueño del cazador
-                escena0();
-                break;
+                case 2: //Volver al sueño del cazador
+                    escena0();
+                    break;
+            }
+        } else {
+            FuncionesGraficas.warning("No puedes entrar", "Necesitas la Insignia de Kosm para acceder a la pesadilla de la Aldea Pesquera.");
+            escena0();
         }
     }
     
