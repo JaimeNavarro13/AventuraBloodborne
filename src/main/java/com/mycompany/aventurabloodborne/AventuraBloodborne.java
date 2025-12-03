@@ -323,7 +323,7 @@ public class AventuraBloodborne {
 
                     FuncionesGraficas.FotoyMensaje(
                             "¡GOLPE DEVASTADOR!",
-                            "src/main/java/imagenes/tiburonSolo.png",
+                            "src/main/java/imagenes/BestiaClerigo.png",
                             "El golpe de la bestia te deja desorientado. Recibes " + dañoBestiaClerigo + " de daño.",
                             0.8, false);
                        }
@@ -343,6 +343,7 @@ public class AventuraBloodborne {
     static void escena2Eileen(){
         
         FuncionesGraficas.FotoyMensaje("Eileen", "src/java/main/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
+        FuncionesGraficas.FotoyMensaje("insignia de Kosm", "src/java/main/imagenes/insigniaDeKosm", "Recibes la insignia de Kosm", 0.8, false);
         insigniaKosm=true;
         escena0();
         return;
