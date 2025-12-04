@@ -484,6 +484,7 @@ public class AventuraBloodborne {
                     peleando = false;
                     ladyMaria = false;
                     cordonHab2 = true;
+                    cordon++;
                     mejoraAtaqueVisceral = 1;
 
                 } else {
@@ -851,6 +852,7 @@ public class AventuraBloodborne {
                 tiburon = false;
                 rakuyo = true;
                 cordonHab3 = true;
+                cordon++;
                 
             } else {
                 
