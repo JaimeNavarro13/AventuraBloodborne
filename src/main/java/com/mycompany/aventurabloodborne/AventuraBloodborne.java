@@ -267,7 +267,7 @@ public class AventuraBloodborne {
                 "2. Ataque visceral"};
 
             int opcionLB = FuncionesGraficas.FotoMensajeMenu(
-                    "Combate contra los tiburones",
+                    "Combate contra la Bestia Clérigo",
                     opcionesLB,
                     "src/main/java/imagenes/BestiaClerigo.png",
                     "Decide con que quieres atacar: ",
