@@ -152,12 +152,13 @@ public class AventuraBloodborne {
     }
 
     static void escena2() {
-        if (cuchillaDentada == false || pistolaDelCazador == false) {
+    do{
+    if (cuchillaDentada == false || pistolaDelCazador == false) {
             FuncionesGraficas.warning("No puedes ir", "Necesitas la cuchilla dentada y la pistola del cazador para aventurarte en Yharnam.");
             escena0();
             return;
 
-        } else if (bestiaClerigo==true) {
+        } else if (insigniaKosm==false) {
             FuncionesGraficas.FotoyMensaje(
                     "Yharnam",
                     "src/main/java/imagenes/yharnam.png",
@@ -165,6 +166,8 @@ public class AventuraBloodborne {
                     0.8, false);
         }else {
             FuncionesGraficas.warning("Nada que hacer aqui", "Ya no hay nada que hacer en Yharnam");
+            escena0();
+            return;
               }
         
 
@@ -236,6 +239,7 @@ public class AventuraBloodborne {
                                     "Has conseguido la llave de la torre del reloj astral.",
                                     0.8, false);
                             llaveTorreReloj = true;
+                            bestiaClerigo=false;
                             escena2();
                             break;
                     }
@@ -245,8 +249,10 @@ public class AventuraBloodborne {
                     break;
             }
         }
-
+        
+    }while(insigniaKosm=false);    
     }
+        
     static void luchaBestiaClerigo(){
     
     int vidaJug=200;
@@ -354,8 +360,8 @@ public class AventuraBloodborne {
 
     static void escena2Eileen(){
         
-        FuncionesGraficas.FotoyMensaje("Eileen", "src/java/main/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
-        FuncionesGraficas.FotoyMensaje("insignia de Kosm", "src/java/main/imagenes/insigniaDeKosm", "Recibes la insignia de Kosm", 0.8, false);
+        FuncionesGraficas.FotoyMensaje("Eileen", "src/main/java/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
+        FuncionesGraficas.FotoyMensaje("insignia de Kosm", "src/main/java/imagenes/insigniaDeKosm.png", "Recibes la insignia de Kosm", 0.8, false);
         insigniaKosm=true;
         escena0();
         return;
