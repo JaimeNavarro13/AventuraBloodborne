@@ -74,7 +74,6 @@ public class AventuraBloodborne {
         }
 
     } catch (IOException | ClassNotFoundException e) {
-        // Si el fichero no existe o hay error, empezamos con lista vacía
         hallOfFame = new ArrayList<>();
         System.out.println("No se pudo leer hallOfFame: " + e.getMessage());
     }
@@ -90,21 +89,16 @@ public class AventuraBloodborne {
     
     static void registrarYMostrarHallOfFame() {
 
-    // 1) Calcular tiempo de la partida
     t2 = System.currentTimeMillis();
     long duracionMs = t2 - t1;
 
-    // 2) Fecha actual
     Calendar cal = Calendar.getInstance();
 
-    // 3) Crear Cazador y añadirlo al ArrayList
     Cazador c = new Cazador(nombreJug, duracionMs, cal);
     hallOfFame.add(c);
 
-    // 4) Guardar en disco
     salvarHallOfFame();
 
-    // 5) Mostrar por consola igual que hace tu profe
     System.out.println("HALL OF FAME");
     for (int i = 0; i < hallOfFame.size(); i++) {
 
