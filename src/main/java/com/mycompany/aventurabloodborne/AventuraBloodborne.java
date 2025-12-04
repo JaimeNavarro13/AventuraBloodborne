@@ -359,7 +359,6 @@ public class AventuraBloodborne {
 
 
     static void escena2Eileen(){
-        System.out.println("a ver");
         
         FuncionesGraficas.FotoyMensaje("Eileen", "src/main/java/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
         FuncionesGraficas.FotoyMensaje("insignia de Kosm", "src/main/java/imagenes/insigniaDeKosm.png", "Recibes la insignia de Kosm", 0.8, false);
