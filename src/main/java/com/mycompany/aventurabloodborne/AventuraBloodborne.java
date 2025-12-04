@@ -3,6 +3,11 @@
  */
 package com.mycompany.aventurabloodborne;
 
+import clases.Cazador;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import modulos.*;
 
@@ -30,11 +35,17 @@ public class AventuraBloodborne {
     static boolean tiburon = true;
     static boolean rakuyo = false;
     static boolean cuchillaChaman = false;
+    
+    static ArrayList<Cazador> hallOfFame;
+    static File datosCazadores = new File("src/main/java/Ficheros/HallOfFame.dat");
 
+    
     public static void main(String[] args) {
+        
+        cargarHallOfFame();
 
         String resp;
-
+           
         do {
             nombreJug = FuncionesGraficas.FotoYPedirDatos(
                     "Creación del cazador", 
@@ -53,8 +64,60 @@ public class AventuraBloodborne {
             resp = FuncionesGraficas.pedirDatos("Jugar de nuevo", "¿Desea jugar de nuevo? (S/N)");
         } while (resp != null && resp.equalsIgnoreCase("S"));
     }
+    
+    static void cargarHallOfFame() {
+    try {
+        hallOfFame = (ArrayList<Cazador>) Ficheros.leerTabla(datosCazadores);
 
-    static void presentacionJuego() {
+        if (hallOfFame == null) {
+            hallOfFame = new ArrayList<>();
+        }
+
+    } catch (IOException | ClassNotFoundException e) {
+        // Si el fichero no existe o hay error, empezamos con lista vacía
+        hallOfFame = new ArrayList<>();
+        System.out.println("No se pudo leer hallOfFame: " + e.getMessage());
+    }
+}
+    
+    static void salvarHallOfFame() {
+    try {
+        Ficheros.escribirTabla(hallOfFame, datosCazadores);
+    } catch (IOException e) {
+        System.out.println("Error al guardar hallOfFame: " + e.getMessage());
+    }
+}
+    
+    static void registrarYMostrarHallOfFame() {
+
+    // 1) Calcular tiempo de la partida
+    t2 = System.currentTimeMillis();
+    long duracionMs = t2 - t1;
+
+    // 2) Fecha actual
+    Calendar cal = Calendar.getInstance();
+
+    // 3) Crear Cazador y añadirlo al ArrayList
+    Cazador c = new Cazador(nombreJug, duracionMs, cal);
+    hallOfFame.add(c);
+
+    // 4) Guardar en disco
+    salvarHallOfFame();
+
+    // 5) Mostrar por consola igual que hace tu profe
+    System.out.println("HALL OF FAME");
+    for (int i = 0; i < hallOfFame.size(); i++) {
+
+        Cazador c2 = hallOfFame.get(i);
+
+        System.out.println(
+                         "Nombre : " + c2.getNombre()
+                         + "  Tiempo : " + c2.getTiempo()
+                         + "  Fecha : " + c2.getFecha().getTime());
+    }
+}
+
+        static void presentacionJuego() {
         FuncionesGraficas.FotoyMensaje(
                 "Sueño del cazador", 
                 "src/main/java/imagenes/Presentacion.png", 
@@ -465,8 +528,9 @@ public class AventuraBloodborne {
                                     0.8, false);
 
                             vidaMaria = vidaMaria - danoVisceral;
+                            ataqueVisceral=false;
                         } else {
-                            FuncionesGraficas.warning("Fallaste", "No lograste conectar el ataque visceral a tiempo.");
+                            FuncionesGraficas.warning("No disponible", "No puedes realizar el ataque visceral todavía.");
                             continue;
                         }
                         break;
@@ -491,6 +555,7 @@ public class AventuraBloodborne {
                     ladyMaria = false;
                     cordonHab2 = true;
                     cordon++;
+                    ataqueVisceral=true;
                     mejoraAtaqueVisceral = 1;
 
                 } else {
@@ -524,7 +589,7 @@ public class AventuraBloodborne {
                                 "Corte rápido",
                                 "src/main/java/imagenes/ladyMaria.png",
                                 "Sus movimientos son elegantes pero letales. Recibes " + danoMariaBase + " de daño.",
-                                1.2, false);
+                                0.8, false);
                     }
                 }
 
@@ -576,7 +641,7 @@ public class AventuraBloodborne {
                             vidaMaria = vidaMaria - danoVisceral;
                             ataqueVisceral=false;
                         } else {
-                            FuncionesGraficas.warning("Fallaste", "No lograste conectar el ataque visceral a tiempo.");
+                            FuncionesGraficas.warning("Fallaste", "No puedes realizar el ataque visceral todavía.");
                             continue;
                         }
                         break;
@@ -602,6 +667,7 @@ public class AventuraBloodborne {
 
                     peleando = false;
                     ladyMaria = false;
+                    ataqueVisceral=true;
                     mejoraAtaqueVisceral = 1;
 
                 } else {
@@ -834,6 +900,7 @@ public class AventuraBloodborne {
                                 0.8, false);
 
                         vidaTiburon = vidaTiburon - danoVisceral;
+                        ataqueVisceral=false;
                     } else {
                         FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
                         continue;
@@ -859,6 +926,7 @@ public class AventuraBloodborne {
                 rakuyo = true;
                 cordonHab3 = true;
                 cordon++;
+                ataqueVisceral=true;
                 
             } else {
                 
@@ -964,7 +1032,8 @@ public class AventuraBloodborne {
                         "Has derrotado a todos los bosses y has eliminado la pesadilla."
                         + "\nTiempo total de la cacería: " + duracionSegundos + " segundos."
                 );
-
+                
+                registrarYMostrarHallOfFame();
                 System.exit(0);
 
             } else {
