@@ -904,7 +904,7 @@ public class AventuraBloodborne {
         if (bestiaClerigo == false && ladyMaria == false && tiburon == false) {
             FuncionesGraficas.FotoyMensaje(
                     "Umbral de la pesadilla",
-                    "imagenes/FinalBossIntro.png", // pon aquí tu imagen del jefe finallllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                    "imagenes/FinalBossIntro.png", // fotofinal1
                     "Has superado todas las pruebas."
                     + "\nAnte ti, la pesadilla se condensa en una única forma imposible."
                     + "\nNo hay vuelta atrás.",
@@ -914,7 +914,7 @@ public class AventuraBloodborne {
             FuncionesGraficas.FotoMensajeMenu(
                     "Última decisión",
                     opciones,
-                    "imagenes/FinalBossIntro.png",//////////////////////////////////////////////////////////
+                    "imagenes/FinalBossIntro.png",//final2
                     "Solo si has vencido en las tres peleas puedes llegar hasta aquí."
                     + "\nAceptas tu destino… y alzas tu arma.",
                     0.8, false);
@@ -931,7 +931,7 @@ public class AventuraBloodborne {
 
                 FuncionesGraficas.FotoyMensaje(
                         "Cazador contra Pesadilla",
-                        "imagenes/FinalBueno2.png",////////////////////////////////////////////////////////////////////////////////
+                        "imagenes/FinalBueno2.png",//final3
                         "La bestia se abalanza sobre ti. Cada impacto debería matarte, pero sigues en pie.\n"
                         + "Tus golpes atraviesan carne y raíces, arrancando gritos que resuenan en todo el sueño.\n"
                         + "Por un instante, comprendes que esta vez… sí puedes ganar.",
@@ -940,7 +940,7 @@ public class AventuraBloodborne {
                 // Viñeta 3: golpe final + despertar
                 FuncionesGraficas.FotoyMensaje(
                         "Despertar del cazador",
-                        "imagenes/FinalBueno3.png",//////////////////////////////////////////////////////////////////////////////////////////////
+                        "imagenes/FinalBueno3.png",//finalbueno
                         "Encuentras una única abertura en el caos de extremidades.\n"
                         + "Clavas tu arma con todas tus fuerzas. La pesadilla se agrieta y se desmorona."
                         + "\nAbres los ojos en una cama desconocida. No hay luna roja. No hay ecos.\n"
@@ -964,7 +964,7 @@ public class AventuraBloodborne {
                 //La otra parte de la historia, no consigues todos los tercios de los cordones umbilicales y quedas atrapado para siempre.
                 FuncionesGraficas.FotoyMensaje(
                         "Cordones insuficientes",
-                        "imagenes/FinalMalo1.png",/////////////////////////////////////////////////////////////////////////////////
+                        "imagenes/FinalMalo1.png",//final3
                         "Los cordones que llevas dentro laten con violencia, pero uno de ellos permanece en silencio."
                         + "\nLa criatura final te observa desde lo alto, como si ya conociera el resultado."
                         + "\nSabes que algo falla… pero es demasiado tarde para retroceder.",
@@ -972,7 +972,7 @@ public class AventuraBloodborne {
 
                 FuncionesGraficas.FotoyMensaje(
                         "A mitad del abismo",
-                        "imagenes/FinalMalo2.png",////////////////////////////////////////////////////////////////////////////////////
+                        "imagenes/FinalMalo2.png",//finalmalo2
                         "Luchas con todo lo que te queda. Hieres a la pesadilla, la haces retroceder."
                         + "\nSu forma se contrae y parece desmoronarse. Crees que estás ganando."
                         + "\nEntonces, el sueño entero da un único latido.",
@@ -980,7 +980,7 @@ public class AventuraBloodborne {
 
                 FuncionesGraficas.FotoyMensaje(
                         "Prisionero del Sueño",
-                        "imagenes/FinalMalo3.png",/////////////////////////////////////////////////////////////////////////////////////
+                        "imagenes/FinalMalo3.png",//finalmalo3
                         "Los cordones incompletos no bastan."
                         + "\nLa pesadilla comprende tu intento… y se ríe de ti en silencio."
                         + "\nUn pulso recorre todo el Sueño del Cazador. Tu cuerpo se queda inmóvil, clavado en el suelo."
