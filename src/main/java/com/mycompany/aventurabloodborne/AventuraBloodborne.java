@@ -908,6 +908,102 @@ public class AventuraBloodborne {
     }
 
     static void escena5() {
+        if (bestiaClerigo == false && ladyMaria == false && tiburon == false) {
+            FuncionesGraficas.FotoyMensaje(
+                    "Umbral de la pesadilla",
+                    "imagenes/FinalBossIntro.png", // fotofinal1
+                    "Has superado todas las pruebas."
+                    + "\nAnte ti, la pesadilla se condensa en una única forma imposible."
+                    + "\nNo hay vuelta atrás.",
+                    0.8, false);
 
+            String[] opciones = {"Luchar"}; //Única opción, no tienes vuelta atrás, solo aceptar
+            FuncionesGraficas.FotoMensajeMenu(
+                    "Última decisión",
+                    opciones,
+                    "imagenes/FinalBossIntro.png",//final2
+                    "Solo si has vencido en las tres peleas puedes llegar hasta aquí."
+                    + "\nAceptas tu destino… y alzas tu arma.",
+                    0.8, false);
+
+            if (cordon == 3) {
+                //Esto es como una historia, esta parte sería la que tiene el final bueno.
+                FuncionesGraficas.FotoyMensaje( 
+                        "La luna se rompe",
+                        "imagenes/escenafinal.png",
+                        "Los tres tercios de cordón laten al unísono en tu interior."
+                        + "\nLa luna roja tiembla sobre el Sueño del Cazador y se agrieta como cristal viejo."
+                        + "\nLa criatura final ruge, pero algo en el mundo entero empieza a romperse.",
+                        0.8, false);
+
+                FuncionesGraficas.FotoyMensaje(
+                        "Cazador contra Pesadilla",
+                        "imagenes/FinalBueno2.png",//final3
+                        "La bestia se abalanza sobre ti. Cada impacto debería matarte, pero sigues en pie.\n"
+                        + "Tus golpes atraviesan carne y raíces, arrancando gritos que resuenan en todo el sueño.\n"
+                        + "Por un instante, comprendes que esta vez… sí puedes ganar.",
+                        0.8, false);
+
+                // Viñeta 3: golpe final + despertar
+                FuncionesGraficas.FotoyMensaje(
+                        "Despertar del cazador",
+                        "imagenes/FinalBueno3.png",//finalbueno
+                        "Encuentras una única abertura en el caos de extremidades.\n"
+                        + "Clavas tu arma con todas tus fuerzas. La pesadilla se agrieta y se desmorona."
+                        + "\nAbres los ojos en una cama desconocida. No hay luna roja. No hay ecos.\n"
+                        + "\nSolo el viento colándose por una ventana abierta."
+                        + "\nLa cacería ha terminado.",
+                        0.8, false);
+
+                t2 = System.currentTimeMillis(); //Tomamos el tiempo final que ha tardado el jugador y lo añadimos al Hall of fame
+                long duracionSegundos = (t2 - t1) / 1000;
+
+                FuncionesGraficas.mostrarDatos(
+                        "Fin del juego",
+                        "Has derrotado a todos los bosses y has eliminado la pesadilla."
+                        + "\nTiempo total de la cacería: " + duracionSegundos + " segundos."
+                );
+
+                System.exit(0);
+
+            } else {
+
+                //La otra parte de la historia, no consigues todos los tercios de los cordones umbilicales y quedas atrapado para siempre.
+                FuncionesGraficas.FotoyMensaje(
+                        "Cordones insuficientes",
+                        "imagenes/FinalMalo1.png",//final3
+                        "Los cordones que llevas dentro laten con violencia, pero uno de ellos permanece en silencio."
+                        + "\nLa criatura final te observa desde lo alto, como si ya conociera el resultado."
+                        + "\nSabes que algo falla… pero es demasiado tarde para retroceder.",
+                        0.8, false);
+
+                FuncionesGraficas.FotoyMensaje(
+                        "A mitad del abismo",
+                        "imagenes/FinalMalo2.png",//finalmalo2
+                        "Luchas con todo lo que te queda. Hieres a la pesadilla, la haces retroceder."
+                        + "\nSu forma se contrae y parece desmoronarse. Crees que estás ganando."
+                        + "\nEntonces, el sueño entero da un único latido.",
+                        0.8, false);
+
+                FuncionesGraficas.FotoyMensaje(
+                        "Prisionero del Sueño",
+                        "imagenes/FinalMalo3.png",//finalmalo3
+                        "Los cordones incompletos no bastan."
+                        + "\nLa pesadilla comprende tu intento… y se ríe de ti en silencio."
+                        + "\nUn pulso recorre todo el Sueño del Cazador. Tu cuerpo se queda inmóvil, clavado en el suelo."
+                        + "\nPasan noches, pasan lunas, pasan nuevos cazadores…"
+                        + "\nPara ellos, la cacería acaba de empezar. Para ti… nunca terminará.",
+                        0.8, false);
+
+                System.exit(0);
+            }
+
+        } else {
+            FuncionesGraficas.warning(
+                    "Entrada cerrada",
+                    "La entrada permanece cerrada."
+                    + "\nTres presencias poderosas siguen vivas y te impiden avanzar.");
+            escena0();
+        }
     }
 }
