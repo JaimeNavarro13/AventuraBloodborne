@@ -898,7 +898,7 @@ public class AventuraBloodborne {
 
     static void luchaTiburones() {
 
-        int vidaJug = 140;
+        int vidaJug = 145;
         int vidaTiburon = 250;
         int danoJugBase = 70;
         int danoTiburonBase = 50;
