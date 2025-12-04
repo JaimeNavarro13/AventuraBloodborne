@@ -4,6 +4,7 @@
 package com.mycompany.aventurabloodborne;
 
 import clases.Cazador;
+import clases.GestorSonidos;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,22 +36,23 @@ public class AventuraBloodborne {
     static boolean tiburon = true;
     static boolean rakuyo = false;
     static boolean cuchillaChaman = false;
-    
+
     static ArrayList<Cazador> hallOfFame;
     static File datosCazadores = new File("src/main/java/Ficheros/HallOfFame.dat");
 
-    
     public static void main(String[] args) {
-        
+
+        GestorSonidos.iniciarMusicaFondo();
+
         cargarHallOfFame();
 
         String resp;
-           
+
         do {
             nombreJug = FuncionesGraficas.FotoYPedirDatos(
-                    "Creación del cazador", 
-                    "src/main/java/imagenes/NombreJugador.png", 
-                    "¿Cuál es el nombre de tu cazador?", 
+                    "Creación del cazador",
+                    "src/main/java/imagenes/NombreJugador.png",
+                    "¿Cuál es el nombre de tu cazador?",
                     0.8, false);
 
             presentacionJuego();
@@ -64,69 +66,67 @@ public class AventuraBloodborne {
             resp = FuncionesGraficas.pedirDatos("Jugar de nuevo", "¿Desea jugar de nuevo? (S/N)");
         } while (resp != null && resp.equalsIgnoreCase("S"));
     }
-    
+
     static void cargarHallOfFame() {
-    try {
-        hallOfFame = (ArrayList<Cazador>) Ficheros.leerTabla(datosCazadores);
+        try {
+            hallOfFame = (ArrayList<Cazador>) Ficheros.leerTabla(datosCazadores);
 
-        if (hallOfFame == null) {
+            if (hallOfFame == null) {
+                hallOfFame = new ArrayList<>();
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
             hallOfFame = new ArrayList<>();
+            System.out.println("No se pudo leer hallOfFame: " + e.getMessage());
         }
+    }
 
-    } catch (IOException | ClassNotFoundException e) {
-        hallOfFame = new ArrayList<>();
-        System.out.println("No se pudo leer hallOfFame: " + e.getMessage());
-    }
-}
-    
     static void salvarHallOfFame() {
-    try {
-        Ficheros.escribirTabla(hallOfFame, datosCazadores);
-    } catch (IOException e) {
-        System.out.println("Error al guardar hallOfFame: " + e.getMessage());
+        try {
+            Ficheros.escribirTabla(hallOfFame, datosCazadores);
+        } catch (IOException e) {
+            System.out.println("Error al guardar hallOfFame: " + e.getMessage());
+        }
     }
-}
-    
+
     static void registrarYMostrarHallOfFame() {
 
-    t2 = System.currentTimeMillis();
-    long duracionMs = t2 - t1;
+        t2 = System.currentTimeMillis();
+        long duracionMs = t2 - t1;
 
-    Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
 
-    Cazador c = new Cazador(nombreJug, duracionMs, cal);
-    hallOfFame.add(c);
+        Cazador c = new Cazador(nombreJug, duracionMs, cal);
+        hallOfFame.add(c);
 
-    salvarHallOfFame();
+        salvarHallOfFame();
 
-    System.out.println("HALL OF FAME");
-    
-    hallOfFame.sort((c1, c2) -> Long.compare(c1.getTiempo(), c2.getTiempo()));
+        System.out.println("HALL OF FAME");
 
-    
-    for (int i = 0; i < hallOfFame.size(); i++) {
+        hallOfFame.sort((c1, c2) -> Long.compare(c1.getTiempo(), c2.getTiempo()));
 
-        Cazador c2 = hallOfFame.get(i);
-        
-        long ms = c2.getTiempo();
-        long totalSeg = ms / 1000;
-        long min = totalSeg / 60;
-        long seg = totalSeg % 60;
+        for (int i = 0; i < hallOfFame.size(); i++) {
 
-        System.out.println(
-                         "Nombre: " + c2.getNombre()
-                         + "  Tiempo: " + min + " min " + seg + " s "
-                         + "  Fecha: " + c2.getFecha().getTime());
-        
-        
+            Cazador c2 = hallOfFame.get(i);
+
+            long ms = c2.getTiempo();
+            long totalSeg = ms / 1000;
+            long min = totalSeg / 60;
+            long seg = totalSeg % 60;
+
+            System.out.println(
+                    "Nombre: " + c2.getNombre()
+                    + "  Tiempo: " + min + " min " + seg + " s "
+                    + "  Fecha: " + c2.getFecha().getTime());
+
+        }
     }
-}
 
-        static void presentacionJuego() {
+    static void presentacionJuego() {
         FuncionesGraficas.FotoyMensaje(
-                "Sueño del cazador", 
-                "src/main/java/imagenes/Presentacion.png", 
-                "Bienvenido al sueño del cazador, " + nombreJug, 
+                "Sueño del cazador",
+                "src/main/java/imagenes/Presentacion.png",
+                "Bienvenido al sueño del cazador, " + nombreJug,
                 0.8, false);
     }
 
@@ -137,16 +137,16 @@ public class AventuraBloodborne {
     static void escena0() {
 
         String[] opciones = {
-            "Ir a la casa", 
-            "Ir a Yharnam", 
-            "Ir a la torre del reloj", 
-            "Ir a la aldea pesquera", 
+            "Ir a la casa",
+            "Ir a Yharnam",
+            "Ir a la torre del reloj",
+            "Ir a la aldea pesquera",
             "Explorar un paisaje inusual"};
 
         int opcion = FuncionesGraficas.FotoMensajeMenu(
-                "Comienzo de la cacería", opciones, 
-                "src/main/java/imagenes/SueñoDelCazador.png", 
-                "¿Dónde quieres ir?", 
+                "Comienzo de la cacería", opciones,
+                "src/main/java/imagenes/SueñoDelCazador.png",
+                "¿Dónde quieres ir?",
                 0.8, false);
 
         switch (opcion) {
@@ -170,22 +170,22 @@ public class AventuraBloodborne {
 
     static void escena1() {
         String[] opciones = {
-            "1. Abrir armario", 
-            "2. Buscar en la habitación", 
+            "1. Abrir armario",
+            "2. Buscar en la habitación",
             "3. Volver al sueño del cazador"};
         int opcion = FuncionesGraficas.FotoMensajeMenu(
-                "Casa del cazador", opciones, 
-                "src/main/java/imagenes/InteriorCasa.png", 
-                "Te encuentras en la casa del cazador.", 
+                "Casa del cazador", opciones,
+                "src/main/java/imagenes/InteriorCasa.png",
+                "Te encuentras en la casa del cazador.",
                 0.8, false);
 
         switch (opcion) {
             case 0: //Abrir armario
                 if (cuchillaDentada == false && pistolaDelCazador == false) {
                     FuncionesGraficas.FotoyMensaje(
-                            "Armario del cazador", 
-                            "src/main/java/imagenes/CuchillaDentadaYPistolaDelCazador.png", 
-                            "Has encontrado la cuchilla dentada y la pistola del cazador.", 
+                            "Armario del cazador",
+                            "src/main/java/imagenes/CuchillaDentadaYPistolaDelCazador.png",
+                            "Has encontrado la cuchilla dentada y la pistola del cazador.",
                             0.8, false);
                     cuchillaDentada = true;
                     pistolaDelCazador = true;
@@ -197,9 +197,9 @@ public class AventuraBloodborne {
             case 1: //Buscar en la habitación
                 if (cordonHab1 == false) {
                     FuncionesGraficas.FotoyMensaje(
-                            "Habitación del cazador", 
-                            "src/main/java/imagenes/TercioCordonUmbilical.png", 
-                            "Rebuscas entre papeles... encuentras un cordón umbilical.", 
+                            "Habitación del cazador",
+                            "src/main/java/imagenes/TercioCordonUmbilical.png",
+                            "Rebuscas entre papeles... encuentras un cordón umbilical.",
                             0.8, false);
                     cordonHab1 = true;
                     cordon++;
@@ -220,123 +220,123 @@ public class AventuraBloodborne {
     }
 
     static void escena2() {
-    do{
-    if (cuchillaDentada == false || pistolaDelCazador == false) {
-            FuncionesGraficas.warning("No puedes ir", "Necesitas la cuchilla dentada y la pistola del cazador para aventurarte en Yharnam.");
-            escena0();
-            return;
+        do {
+            if (cuchillaDentada == false || pistolaDelCazador == false) {
+                FuncionesGraficas.warning("No puedes ir", "Necesitas la cuchilla dentada y la pistola del cazador para aventurarte en Yharnam.");
+                escena0();
+                return;
 
-        } else if (insigniaKosm==false) {
-            FuncionesGraficas.FotoyMensaje(
-                    "Yharnam",
-                    "src/main/java/imagenes/yharnam.png",
-                    "Bienvenido a Yharnam",
-                    0.8, false);
-        }else {
-            FuncionesGraficas.warning("Nada que hacer aqui", "Ya no hay nada que hacer en Yharnam");
-            escena0();
-            return;
-              }
-        
+            } else if (insigniaKosm == false) {
+                FuncionesGraficas.FotoyMensaje(
+                        "Yharnam",
+                        "src/main/java/imagenes/yharnam.png",
+                        "Bienvenido a Yharnam",
+                        0.8, false);
+            } else {
+                FuncionesGraficas.warning("Nada que hacer aqui", "Ya no hay nada que hacer en Yharnam");
+                escena0();
+                return;
+            }
 
-        if (bestiaClerigo == false) {
-            escena2Eileen();
-        } else {
-            String[] opciones = {
-                "1. Hablar con Eileen ",
-                "2. Explorar",
-                "3. Volver al sueño del cazador"};
-            int opcion = FuncionesGraficas.FotoMensajeMenu(
-                    "Yharnam", opciones,
-                    "src/main/java/imagenes/yharnam.png",
-                    "Decide que quieres hacer.",
-                    0.8, false);
+            if (bestiaClerigo == false) {
+                escena2Eileen();
+            } else {
+                String[] opciones = {
+                    "1. Hablar con Eileen ",
+                    "2. Explorar",
+                    "3. Volver al sueño del cazador"};
+                int opcion = FuncionesGraficas.FotoMensajeMenu(
+                        "Yharnam", opciones,
+                        "src/main/java/imagenes/yharnam.png",
+                        "Decide que quieres hacer.",
+                        0.8, false);
 
-            switch (opcion) {
+                switch (opcion) {
 
-                case 0: //Hablar con Eileen
-                    if (ataqueVisceral == false) {
-                        FuncionesGraficas.FotoyMensaje(
-                                "Habilidad adquirida",
-                                "src/main/java/imagenes/DialocoConEileen.png",
-                                "Te he estado observando desde las sombras."
-                                + "\nTus pasos son torpes, pero tu instinto es bueno."
-                                + "\nAfila tu determinación y apunta al corazón cuando el tiempo pare."
-                                + "\nAhora, en combates difíciles, podrás hacer ataques viscerales, no los desperdicies.",
-                                0.8, false);
+                    case 0: //Hablar con Eileen
+                        if (ataqueVisceral == false) {
+                            FuncionesGraficas.FotoyMensaje(
+                                    "Habilidad adquirida",
+                                    "src/main/java/imagenes/DialocoConEileen.png",
+                                    "Te he estado observando desde las sombras."
+                                    + "\nTus pasos son torpes, pero tu instinto es bueno."
+                                    + "\nAfila tu determinación y apunta al corazón cuando el tiempo pare."
+                                    + "\nAhora, en combates difíciles, podrás hacer ataques viscerales, no los desperdicies.",
+                                    0.8, false);
 
-                        ataqueVisceral = true;
-                    } else {
-                        FuncionesGraficas.warning("Habilidad adquirida", "¡Ya has adquirido el ataque visceral!");
-                    }
-                    escena2();
-                    break;
-
-                case 1://Explorar
-                    if (ataqueVisceral == false) {
-                        FuncionesGraficas.warning("Aviso", "Deberias hablar primero con Eileen.");
+                            ataqueVisceral = true;
+                        } else {
+                            FuncionesGraficas.warning("Habilidad adquirida", "¡Ya has adquirido el ataque visceral!");
+                        }
                         escena2();
-                        return;
-                    }
+                        break;
+
+                    case 1://Explorar
+                        if (ataqueVisceral == false) {
+                            FuncionesGraficas.warning("Aviso", "Deberias hablar primero con Eileen.");
+                            escena2();
+                            return;
+                        }
                         String[] opcionesBC = {
                             "1.Hablar",
                             "2.Pelear"
-                            };
+                        };
                         int opcionBC = FuncionesGraficas.FotoMensajeMenu(
                                 "Bestia Clerigo", opcionesBC,
                                 "src/main/java/imagenes/BestiaClerigo.png",
                                 "Te encuentras una bestia que no parece ser de este mundo, ¿que harás? ",
                                 0.8, false);
-                    
 
-                    switch (opcionBC) {
+                        switch (opcionBC) {
 
-                        case 0:
-                            luchaBestiaClerigo();
-                            break;
+                            case 0:
+                                luchaBestiaClerigo();
+                                break;
 
-                        case 1:
-                            FuncionesGraficas.FotoyMensaje(
-                                    "Bestia Clerigo",
-                                    "src/main/java/imagenes/BestiaClerigo.png",
-                                    "Toma esta llave y ve a por quien originó esta pesadilla.",
-                                    0.8, false);
-                            FuncionesGraficas.FotoyMensaje(
-                                    "Llave de la torre",
-                                    "src/main/java/imagenes/LlaveTorreDelReloj.png",
-                                    "Has conseguido la llave de la torre del reloj astral.",
-                                    0.8, false);
-                            llaveTorreReloj = true;
-                            bestiaClerigo=false;
-                            escena2();
-                            break;
-                    }
-                    
-                case 2: //Volver al sueño del cazador
-                    escena0();
-                    break;
+                            case 1:
+                                FuncionesGraficas.FotoyMensaje(
+                                        "Bestia Clerigo",
+                                        "src/main/java/imagenes/BestiaClerigo.png",
+                                        "Toma esta llave y ve a por quien originó esta pesadilla.",
+                                        0.8, false);
+                                FuncionesGraficas.FotoyMensaje(
+                                        "Llave de la torre",
+                                        "src/main/java/imagenes/LlaveTorreDelReloj.png",
+                                        "Has conseguido la llave de la torre del reloj astral.",
+                                        0.8, false);
+                                llaveTorreReloj = true;
+                                bestiaClerigo = false;
+                                escena2();
+                                break;
+                        }
+
+                    case 2: //Volver al sueño del cazador
+                        escena0();
+                        break;
+                }
             }
-        }
-        
-    }while(insigniaKosm=false);    
+
+        } while (insigniaKosm = false);
     }
-        
-    static void luchaBestiaClerigo(){
-    
-    int vidaJug=200;
-    int dañoJugBase=50;
-    int dañoVisceral=75;
-    int curacionVisceral=50;
-    int vidaBestiaClerigo=1000;
-    int dañoBestiaClerigo=75;
-    boolean hacerVisceral=false;
-    boolean ladyMaria=true;
-    boolean peleando=true;
-    Random dado = new Random();
-    
-    while (vidaJug > 0 && vidaBestiaClerigo > 0) 
-    {
-     String[] opcionesLB = {
+
+    static void luchaBestiaClerigo() {
+
+        int vidaJug = 200;
+        int dañoJugBase = 50;
+        int dañoVisceral = 75;
+        int curacionVisceral = 50;
+        int vidaBestiaClerigo = 1000;
+        int dañoBestiaClerigo = 75;
+        boolean hacerVisceral = false;
+        boolean ladyMaria = true;
+        boolean peleando = true;
+        Random dado = new Random();
+
+        GestorSonidos.pararMusicaFondo();
+        GestorSonidos.iniciarMusicaPeleaBestiaClerigo();
+
+        while (vidaJug > 0 && vidaBestiaClerigo > 0) {
+            String[] opcionesLB = {
                 "1. Atacar",
                 "2. Ataque visceral"};
 
@@ -367,7 +367,7 @@ public class AventuraBloodborne {
                                 0.8, false);
 
                         vidaBestiaClerigo = vidaBestiaClerigo - dañoVisceral;
-                        
+
                     } else {
                         FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
                     }
@@ -376,28 +376,34 @@ public class AventuraBloodborne {
             }
 
             if (vidaBestiaClerigo < 500) {
-                FuncionesGraficas.FotoyMensaje(
+
+                GestorSonidos.pararMusicaPeleaBestiaClerigo();
+
+                FuncionesGraficas.FotoMensajeSonido(
                         "¡PELIGRO!",
                         "src/main/java/imagenes/BestiaClerigo.png",
                         "La bestia clerigo lanza un ataque desesperado.",
-                        0.8, false);
-                        vidaJug = vidaJug - dañoBestiaClerigo*10;
-                        
-                        if (vidaJug<= 0)
-                            FuncionesGraficas.FotoyMensaje("Se acabó.", "src/java/main/imagenes/YouDied.png", "Hay cosas que no se solucionan solo peleando...", 0.8, false);
-                        System.exit(0);
-                
+                        "src/main/java/Sonidos/YouDied.mp3",
+                        0.8, 1, false);
+
+                vidaJug = vidaJug - dañoBestiaClerigo * 10;
+
+                if (vidaJug <= 0) {
+                    FuncionesGraficas.FotoyMensaje("Se acabó.", "src/java/main/imagenes/YouDied.png", "Hay cosas que no se solucionan solo peleando...", 0.8, false);
+                }
+                System.exit(0);
+
             } else {
-                
+
                 FuncionesGraficas.FotoyMensaje(
-                        "La bestia se prepara para atacar", 
-                        "src/main/java/imagenes/BestiaClerigo.png", 
-                        "La Bestia Clérigo lanza un devastador ataque hacia ti", 
+                        "La bestia se prepara para atacar",
+                        "src/main/java/imagenes/BestiaClerigo.png",
+                        "La Bestia Clérigo lanza un devastador ataque hacia ti",
                         0.8, false);
-                
+
                 int suerte = dado.nextInt(5);
 
-                if (suerte==0) {
+                if (suerte == 0) {
 
                     FuncionesGraficas.FotoyMensaje(
                             "Esquiva",
@@ -412,58 +418,62 @@ public class AventuraBloodborne {
                             "src/main/java/imagenes/BestiaClerigo.png",
                             "El golpe de la bestia te deja desorientado. Recibes " + dañoBestiaClerigo + " de daño.",
                             0.8, false);
-                       }
+                }
             }
             if (vidaJug <= 0) {
-                FuncionesGraficas.FotoyMensaje(
+
+                GestorSonidos.pararMusicaPeleaBestiaClerigo();
+
+                FuncionesGraficas.FotoMensajeSonido(
                         "HAS MUERTO",
                         "src/main/java/imagenes/YouDied.png",
                         "Este es tu fin",
-                        0.8, false);
+                        "src/main/java/Sonidos/YouDied.mp3",
+                        0.8, 1, false);
+
+                GestorSonidos.iniciarMusicaFondo();
                 break;
             }
         }
     }
 
+    static void escena2Eileen() {
 
-    static void escena2Eileen(){
-        
         FuncionesGraficas.FotoyMensaje("Eileen", "src/main/java/imagenes/DialocoConEileen.png", "Veo que tienes la llave de la torre del reloj astral, toma esto tambien, te servirá", 0.8, false);
         FuncionesGraficas.FotoyMensaje("insignia de Kosm", "src/main/java/imagenes/insigniaDeKosm.png", "Recibes la insignia de Kosm", 0.8, false);
-        insigniaKosm=true;
+        insigniaKosm = true;
         escena0();
         return;
-        
-    
+
     }
 
     static void escena3() {
-        if (llaveTorreReloj==false) {
+        if (llaveTorreReloj == false) {
             FuncionesGraficas.warning("Acceso bloqueado", "Necesitas la llave de la torre para poder acceder.");
             escena0();
             return;
-        } 
-        
+        }
+
         String[] opciones = {
-            "1. Hablar con Lady Maria", 
-            "2. Pelear con Lady Maria", 
+            "1. Hablar con Lady Maria",
+            "2. Pelear con Lady Maria",
             "3. Huir y volver al sueño del cazador"};
-        
+
         int opcion = FuncionesGraficas.FotoMensajeMenu(
-                "Torre del reloj astral", opciones, 
-                "src/main/java/imagenes/torreDelReloj.jpg", 
-                "Lady Maria reposa inmovil en la silla del reloj astral.", 
+                "Torre del reloj astral", opciones,
+                "src/main/java/imagenes/torreDelReloj.jpg",
+                "Lady Maria reposa inmovil en la silla del reloj astral.",
                 0.8, false);
-        
+
         switch (opcion) {
             case 0: //1. Hablar
-                if (ladyMaria==true) {
-                FuncionesGraficas.FotoyMensaje(
-                        "Lady Maria", 
-                        "src/main/java/imagenes/ladyMaria.png", 
-                        "La verdad que buscas pesa más de lo que imaginas.", 
-                        0.8, false);
-                escena3();
+                if (ladyMaria == true) {
+                    FuncionesGraficas.FotoyMensaje(
+                            "Lady Maria",
+                            "src/main/java/imagenes/ladyMaria.png",
+                            "La verdad que buscas pesa más de lo que imaginas.",
+                            0.8, false);
+                    escena3();
                 } else {
                     FuncionesGraficas.warning("Sala despejada", "Ya has derrotado a la guardiana de la torre. No hay nada más que hacer aquí, salvo avanzar hacia el secreto que ella protegía.");
                     escena3();
@@ -471,22 +481,22 @@ public class AventuraBloodborne {
                 break;
 
             case 1: //2. Pelear
-                if (ladyMaria==true) {
-                luchaLadyMaria();
-                escena3();
+                if (ladyMaria == true) {
+                    luchaLadyMaria();
+                    escena3();
                 } else {
                     FuncionesGraficas.warning("Sala despejada", "Ya has derrotado a la guardiana de la torre. No hay nada más que hacer aquí, salvo avanzar hacia el secreto que ella protegía.");
                     escena3();
                 }
                 break;
-             
+
             case 2: //3. Huir
                 escena0();
                 break;
-             
+
         }
     }
-    
+
     static void luchaLadyMaria() {
 
         int vidaJug = 140;
@@ -496,6 +506,9 @@ public class AventuraBloodborne {
         int danoMariaExtra = 75;
         int danoVisceral = 150;
         boolean peleando = true;
+
+        GestorSonidos.pararMusicaFondo();
+        GestorSonidos.iniciarMusicaPeleaLadyMaria();
 
         if (rakuyo == true) {
 
@@ -533,7 +546,7 @@ public class AventuraBloodborne {
                                     0.8, false);
 
                             vidaMaria = vidaMaria - danoVisceral;
-                            ataqueVisceral=false;
+                            ataqueVisceral = false;
                         } else {
                             FuncionesGraficas.warning("No disponible", "No puedes realizar el ataque visceral todavía.");
                             continue;
@@ -560,8 +573,11 @@ public class AventuraBloodborne {
                     ladyMaria = false;
                     cordonHab2 = true;
                     cordon++;
-                    ataqueVisceral=true;
+                    ataqueVisceral = true;
                     mejoraAtaqueVisceral = 1;
+
+                    GestorSonidos.pararMusicaPeleaLadyMaria();
+                    GestorSonidos.iniciarMusicaFondo();
 
                 } else {
                     FuncionesGraficas.FotoyMensaje(
@@ -599,17 +615,23 @@ public class AventuraBloodborne {
                 }
 
                 if (vidaJug <= 0) {
-                    FuncionesGraficas.FotoyMensaje(
+                    FuncionesGraficas.FotoMensajeSonido(
                             "HAS MUERTO",
                             "src/main/java/imagenes/YouDied.png",
                             "La pesadilla vuelve a empezar...",
-                            0.8, false);
+                            "src/main/java/Sonidos/YouDied.mp3",
+                            0.8, 1, false);
+
                     peleando = false;
                     System.exit(0);
                     break;
                 }
             }
         } else {
+
+            GestorSonidos.pararMusicaFondo();
+            GestorSonidos.iniciarMusicaPeleaLadyMaria();
+
             while (peleando == true) {
 
                 String[] opcionesLM = {
@@ -644,7 +666,7 @@ public class AventuraBloodborne {
                                     0.8, false);
 
                             vidaMaria = vidaMaria - danoVisceral;
-                            ataqueVisceral=false;
+                            ataqueVisceral = false;
                         } else {
                             FuncionesGraficas.warning("Fallaste", "No puedes realizar el ataque visceral todavía.");
                             continue;
@@ -665,15 +687,17 @@ public class AventuraBloodborne {
                     FuncionesGraficas.FotoyMensaje(
                             "Recompensas obtenidas",
                             "src/main/java/imagenes/LMmuerta.png",
-                            
                             "Has conseguido: "
                             + "\nMejora ataque visceral",
                             0.8, false);
 
                     peleando = false;
                     ladyMaria = false;
-                    ataqueVisceral=true;
+                    ataqueVisceral = true;
                     mejoraAtaqueVisceral = 1;
+
+                    GestorSonidos.pararMusicaPeleaLadyMaria();
+                    GestorSonidos.iniciarMusicaFondo();
 
                 } else {
                     FuncionesGraficas.FotoyMensaje(
@@ -711,11 +735,13 @@ public class AventuraBloodborne {
                 }
 
                 if (vidaJug <= 0) {
-                    FuncionesGraficas.FotoyMensaje(
+                    FuncionesGraficas.FotoMensajeSonido(
                             "HAS MUERTO",
                             "src/main/java/imagenes/YouDied.png",
                             "La pesadilla vuelve a empezar...",
-                            0.8, false);
+                            "src/main/java/Sonidos/YouDied.mp3",
+                            0.8, 1, false);
+
                     peleando = false;
                     System.exit(0);
                     break;
@@ -767,11 +793,14 @@ public class AventuraBloodborne {
                                 break;
 
                             case 1: // Seguir un rastro extraño
-                                FuncionesGraficas.FotoyMensaje(
+                                GestorSonidos.pararMusicaFondo();
+                                FuncionesGraficas.FotoMensajeSonido(
                                         "Demasiada curiosidad",
                                         "src/main/java/imagenes/jabali.png",
                                         "Has encontrado algo que no debías...\nHas muerto.",
-                                        0.8, false);
+                                        "src/main/java/Sonidos/YouDied.mp3",
+                                        0.8, 1, false);
+
                                 System.exit(0);
                                 break;
 
@@ -824,6 +853,9 @@ public class AventuraBloodborne {
 
                                 escena4();
                             } else if (cuchillaChaman == false) {
+
+                                GestorSonidos.pararMusicaFondo();
+
                                 FuncionesGraficas.FotoyMensaje(
                                         "Necesitas la cuchilla del chamán",
                                         "src/main/java/imagenes/tiburontemata.png",
@@ -834,13 +866,15 @@ public class AventuraBloodborne {
                                         + "\nHas muerto.",
                                         0.8, false);
 
-                                FuncionesGraficas.FotoyMensaje(
+                                FuncionesGraficas.FotoMensajeSonido(
                                         "Has muerto",
                                         "src/main/java/imagenes/YouDied.png",
                                         "La profundidad del pozo se convierte en tu tumba.",
-                                        0.8, false);
+                                        "src/main/java/Sonidos/YouDied.mp3",
+                                        0.8, 1, false);
 
                                 System.exit(0);
+
                             } else {
                                 luchaTiburones();
                                 escena4();
@@ -861,7 +895,7 @@ public class AventuraBloodborne {
             escena0();
         }
     }
-    
+
     static void luchaTiburones() {
 
         int vidaJug = 300;
@@ -871,7 +905,10 @@ public class AventuraBloodborne {
         int danoTiburonExtra = 90;
         int danoVisceral = 150;
         boolean peleando = true;
-        
+
+        GestorSonidos.pararMusicaFondo();
+        GestorSonidos.iniciarMusicaPeleaTiburones();
+
         while (peleando == true) {
 
             String[] opcionesLT = {
@@ -905,7 +942,7 @@ public class AventuraBloodborne {
                                 0.8, false);
 
                         vidaTiburon = vidaTiburon - danoVisceral;
-                        ataqueVisceral=false;
+                        ataqueVisceral = false;
                     } else {
                         FuncionesGraficas.warning("No disponible", "No puedes usar el ataque visceral");
                         continue;
@@ -926,28 +963,31 @@ public class AventuraBloodborne {
                         "src/main/java/imagenes/Rakuyo.png",
                         "Consigues la Rakuyo.",
                         0.8, false);
-                
+
                 FuncionesGraficas.FotoyMensaje(
-                        "Objeto conseguido", 
-                        "src/main/java/imagenes/TercioCordonUmbilical.png", 
-                        "Has conseguido un tercio de cordón umbilical", 
+                        "Objeto conseguido",
+                        "src/main/java/imagenes/TercioCordonUmbilical.png",
+                        "Has conseguido un tercio de cordón umbilical",
                         0.8, false);
-                
+
                 peleando = false;
                 tiburon = false;
                 rakuyo = true;
                 cordonHab3 = true;
                 cordon++;
-                ataqueVisceral=true;
-                
+                ataqueVisceral = true;
+
+                GestorSonidos.pararMusicaPeleaTiburones();
+                GestorSonidos.iniciarMusicaFondo();
+
             } else {
-                
+
                 FuncionesGraficas.FotoyMensaje(
-                        "La bestia carga", 
-                        "src/main/java/imagenes/luchaTiburones.png", 
-                        "El tiburón hunde los pies en el suelo y se prepara para atacar...", 
+                        "La bestia carga",
+                        "src/main/java/imagenes/luchaTiburones.png",
+                        "El tiburón hunde los pies en el suelo y se prepara para atacar...",
                         1.2, false);
-                
+
                 int suerteDefensa = (int) (Math.random() * 100);
 
                 if (suerteDefensa < 20) {
@@ -976,11 +1016,14 @@ public class AventuraBloodborne {
                 }
             }
             if (vidaJug <= 0) {
-                FuncionesGraficas.FotoyMensaje(
+
+                FuncionesGraficas.FotoMensajeSonido(
                         "HAS MUERTO",
                         "src/main/java/imagenes/YouDied.png",
                         "La oscuridad te consume...",
-                        0.8, false);
+                        "src/main/java/Sonidos/YouDied.mp3",
+                        0.8, 1, false);
+
                 peleando = false;
                 System.exit(0);
                 break;
@@ -989,7 +1032,12 @@ public class AventuraBloodborne {
     }
 
     static void escena5() {
+
         if (bestiaClerigo == false && ladyMaria == false && tiburon == false) {
+
+            GestorSonidos.pararMusicaFondo();
+            GestorSonidos.iniciarMusicaEscenaFinal();
+
             FuncionesGraficas.FotoyMensaje(
                     "Umbral de la pesadilla",
                     "src/main/java/imagenes/fotofinal1.png",
@@ -1008,8 +1056,12 @@ public class AventuraBloodborne {
                     0.8, false);
 
             if (cordon == 3) {
+
+                GestorSonidos.pararMusicaFondo();
+                GestorSonidos.iniciarMusicaEscenaFinal();
+
                 //Esto es como una historia, esta parte sería la que tiene el final bueno.
-                FuncionesGraficas.FotoyMensaje( 
+                FuncionesGraficas.FotoyMensaje(
                         "La luna se rompe",
                         "src/main/java/imagenes/escenafinal.png",
                         "Los tres tercios de cordón laten al unísono en tu interior."
@@ -1044,7 +1096,7 @@ public class AventuraBloodborne {
                         "Has derrotado a todos los bosses y has eliminado la pesadilla."
                         + "\nTiempo total de la cacería: " + duracionSegundos + " segundos."
                 );
-                
+
                 registrarYMostrarHallOfFame();
                 System.exit(0);
 
@@ -1081,6 +1133,7 @@ public class AventuraBloodborne {
             }
 
         } else {
+
             FuncionesGraficas.warning(
                     "Entrada cerrada",
                     "La entrada permanece cerrada."
