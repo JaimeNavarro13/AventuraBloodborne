@@ -321,7 +321,7 @@ public class AventuraBloodborne {
 
     static void luchaBestiaClerigo() {
 
-        int vidaJug = 200;
+        int vidaJug = 120;
         int dañoJugBase = 50;
         int dañoVisceral = 75;
         int curacionVisceral = 50;
@@ -898,7 +898,7 @@ public class AventuraBloodborne {
 
     static void luchaTiburones() {
 
-        int vidaJug = 300;
+        int vidaJug = 140;
         int vidaTiburon = 250;
         int danoJugBase = 70;
         int danoTiburonBase = 50;
