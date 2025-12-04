@@ -610,7 +610,7 @@ public class AventuraBloodborne {
                 }
             }
         } else {
-                        while (peleando == true) {
+            while (peleando == true) {
 
                 String[] opcionesLM = {
                     "1. Atacar con el arma",
@@ -658,7 +658,7 @@ public class AventuraBloodborne {
                             "src/main/java/imagenes/LMmuerta.png",
                             "Maltrecha y sin fuerzas, Maria te mira con ojos cansados. "
                             + "\n'Un cadáver... debe ser dejado en paz', susurra. "
-                            + "\nEn un último acto de desafío, lleva su hoja a su propia garganta y se desploma sobre las flores del jardín astral. "
+                            + "\nEn un último acto de desafío, lleva su hoja a su propia garganta y se desploma sobre su silla. "
                             + "\nLa vía está libre.",
                             0.8, false);
 
@@ -926,6 +926,13 @@ public class AventuraBloodborne {
                         "src/main/java/imagenes/Rakuyo.png",
                         "Consigues la Rakuyo.",
                         0.8, false);
+                
+                FuncionesGraficas.FotoyMensaje(
+                        "Objeto conseguido", 
+                        "src/main/java/imagenes/TercioCordonUmbilical.png", 
+                        "Has conseguido un tercio de cordón umbilical", 
+                        0.8, false);
+                
                 peleando = false;
                 tiburon = false;
                 rakuyo = true;
