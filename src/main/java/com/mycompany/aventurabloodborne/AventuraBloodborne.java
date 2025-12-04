@@ -100,14 +100,25 @@ public class AventuraBloodborne {
     salvarHallOfFame();
 
     System.out.println("HALL OF FAME");
+    
+    hallOfFame.sort((c1, c2) -> Long.compare(c1.getTiempo(), c2.getTiempo()));
+
+    
     for (int i = 0; i < hallOfFame.size(); i++) {
 
         Cazador c2 = hallOfFame.get(i);
+        
+        long ms = c2.getTiempo();
+        long totalSeg = ms / 1000;
+        long min = totalSeg / 60;
+        long seg = totalSeg % 60;
 
         System.out.println(
-                         "Nombre : " + c2.getNombre()
-                         + "  Tiempo : " + c2.getTiempo()
-                         + "  Fecha : " + c2.getFecha().getTime());
+                         "Nombre: " + c2.getNombre()
+                         + "  Tiempo: " + min + " min " + seg + " s "
+                         + "  Fecha: " + c2.getFecha().getTime());
+        
+        
     }
 }
 
@@ -853,7 +864,7 @@ public class AventuraBloodborne {
     
     static void luchaTiburones() {
 
-        int vidaJug = 140;
+        int vidaJug = 300;
         int vidaTiburon = 250;
         int danoJugBase = 70;
         int danoTiburonBase = 50;
@@ -974,7 +985,7 @@ public class AventuraBloodborne {
         if (bestiaClerigo == false && ladyMaria == false && tiburon == false) {
             FuncionesGraficas.FotoyMensaje(
                     "Umbral de la pesadilla",
-                    "imagenes/FinalBossIntro.png", // fotofinal1
+                    "src/main/java/imagenes/fotofinal1.png",
                     "Has superado todas las pruebas."
                     + "\nAnte ti, la pesadilla se condensa en una única forma imposible."
                     + "\nNo hay vuelta atrás.",
@@ -984,7 +995,7 @@ public class AventuraBloodborne {
             FuncionesGraficas.FotoMensajeMenu(
                     "Última decisión",
                     opciones,
-                    "imagenes/FinalBossIntro.png",//final2
+                    "src/main/java/imagenes/final2.png",
                     "Solo si has vencido en las tres peleas puedes llegar hasta aquí."
                     + "\nAceptas tu destino… y alzas tu arma.",
                     0.8, false);
@@ -993,15 +1004,15 @@ public class AventuraBloodborne {
                 //Esto es como una historia, esta parte sería la que tiene el final bueno.
                 FuncionesGraficas.FotoyMensaje( 
                         "La luna se rompe",
-                        "imagenes/escenafinal.png",
+                        "src/main/java/imagenes/escenafinal.png",
                         "Los tres tercios de cordón laten al unísono en tu interior."
                         + "\nLa luna roja tiembla sobre el Sueño del Cazador y se agrieta como cristal viejo."
                         + "\nLa criatura final ruge, pero algo en el mundo entero empieza a romperse.",
-                        0.8, false);
+                        1.2, false);
 
                 FuncionesGraficas.FotoyMensaje(
                         "Cazador contra Pesadilla",
-                        "imagenes/FinalBueno2.png",//final3
+                        "src/main/java/imagenes/final3.png",
                         "La bestia se abalanza sobre ti. Cada impacto debería matarte, pero sigues en pie.\n"
                         + "Tus golpes atraviesan carne y raíces, arrancando gritos que resuenan en todo el sueño.\n"
                         + "Por un instante, comprendes que esta vez… sí puedes ganar.",
@@ -1010,10 +1021,10 @@ public class AventuraBloodborne {
                 // Viñeta 3: golpe final + despertar
                 FuncionesGraficas.FotoyMensaje(
                         "Despertar del cazador",
-                        "imagenes/FinalBueno3.png",//finalbueno
-                        "Encuentras una única abertura en el caos de extremidades.\n"
+                        "src/main/java/imagenes/finalbueno.png",
+                        "Encuentras una única abertura en el caos de extremidades."
                         + "Clavas tu arma con todas tus fuerzas. La pesadilla se agrieta y se desmorona."
-                        + "\nAbres los ojos en una cama desconocida. No hay luna roja. No hay ecos.\n"
+                        + "\nAbres los ojos en una cama desconocida. No hay luna roja. No hay ecos."
                         + "\nSolo el viento colándose por una ventana abierta."
                         + "\nLa cacería ha terminado.",
                         0.8, false);
@@ -1035,7 +1046,7 @@ public class AventuraBloodborne {
                 //La otra parte de la historia, no consigues todos los tercios de los cordones umbilicales y quedas atrapado para siempre.
                 FuncionesGraficas.FotoyMensaje(
                         "Cordones insuficientes",
-                        "imagenes/FinalMalo1.png",//final3
+                        "src/main/java/imagenes/final3.png",
                         "Los cordones que llevas dentro laten con violencia, pero uno de ellos permanece en silencio."
                         + "\nLa criatura final te observa desde lo alto, como si ya conociera el resultado."
                         + "\nSabes que algo falla… pero es demasiado tarde para retroceder.",
@@ -1043,7 +1054,7 @@ public class AventuraBloodborne {
 
                 FuncionesGraficas.FotoyMensaje(
                         "A mitad del abismo",
-                        "imagenes/FinalMalo2.png",//finalmalo2
+                        "src/main/java/imagenes/finalmalo2.png",
                         "Luchas con todo lo que te queda. Hieres a la pesadilla, la haces retroceder."
                         + "\nSu forma se contrae y parece desmoronarse. Crees que estás ganando."
                         + "\nEntonces, el sueño entero da un único latido.",
@@ -1051,7 +1062,7 @@ public class AventuraBloodborne {
 
                 FuncionesGraficas.FotoyMensaje(
                         "Prisionero del Sueño",
-                        "imagenes/FinalMalo3.png",//finalmalo3
+                        "src/main/java/imagenes/finalmalo3.png",
                         "Los cordones incompletos no bastan."
                         + "\nLa pesadilla comprende tu intento… y se ríe de ti en silencio."
                         + "\nUn pulso recorre todo el Sueño del Cazador. Tu cuerpo se queda inmóvil, clavado en el suelo."
